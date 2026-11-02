@@ -10,7 +10,7 @@ the first workshop of a collection is written.
 
 ## What this course is
 
-Guided JupyterLab workshops on [Muru](https://github.com/GrahamDumpleton/muru),
+Guided JupyterLab workshops on [Muru](https://github.com/muruhq/muru),
 the routing edge, control plane and Python runtime for WSGI and ASGI
 applications. They are for Python web developers who have deployed an
 application with Apache and mod_wsgi, gunicorn, uvicorn or Granian, and
@@ -43,8 +43,8 @@ Everything the workshops say about Muru comes from its documentation,
 its source and the installed release, never from memory.
 
 - `reference/muru` is a git submodule of the Muru repository at the
-  tag of the release the workshops teach, `v0.1.0-alpha.12` (published
-  on PyPI as 0.1.0a12). The user documentation under `docs/tutorials`,
+  tag of the release the workshops teach, `v0.1.0-alpha.15` (published
+  on PyPI as 0.1.0a15). The user documentation under `docs/tutorials`,
   `docs/explanation` and `docs/howto` is authoritative for released
   behaviour. `CHANGELOG.md` says which release added what, which is how
   to tell whether a feature is released. The design specification
@@ -350,7 +350,7 @@ show the development run as a release table, and stops the server.
   `show_processes.py`, `docs/serving-python.md`,
   `docs/muru-processes.md` and `docs/releases.md`.
 
-- Requires: `muru==0.1.0a12`, `muructl==0.1.0a12`; `curl` and `ps`.
+- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`; `curl` and `ps`.
 
 - Source: `docs/explanation/architecture.md`,
   `docs/tutorials/first-wsgi-app.md`, `docs/howto/daemon.md`, and the
@@ -390,7 +390,7 @@ one), sends five rounds, describes what it shows, and stops the shop.
 - Format: two terminals and files, viewer area. Ships `shop.py`,
   `send_requests.py` and `docs/where-output-goes.md`.
 
-- Requires: `muru==0.1.0a12`, `muructl==0.1.0a12`, `flask==3.1.3`;
+- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`, `flask==3.1.3`;
   `curl`. Variables `app_port` (8080) and `dashboard_port` (8081).
 
 - Source: `docs/tutorials/first-wsgi-app.md`, `docs/howto/logging.md`,
@@ -434,7 +434,7 @@ and is self-signed on every machine.
 - Format: two terminals and files, viewer area. Ships `greeting.py`,
   `watch.py` and `docs/reloading.md`.
 
-- Requires: `muru==0.1.0a12`, `muructl==0.1.0a12`; `curl`. Variables
+- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`; `curl`. Variables
   `app_port` (8080) and `https_port` (8443).
 
 - Source: `docs/tutorials/first-wsgi-app.md`, `docs/howto/https.md`,
@@ -476,7 +476,7 @@ and stops the server.
   `catalog.py`, `hooks.py`, `fork_demo.py` and
   `docs/preload-and-fork.md`.
 
-- Requires: `muru==0.1.0a12`, `muructl==0.1.0a12`; `curl`.
+- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`; `curl`.
 
 - Source: `docs/explanation/preload.md`, `muructl run --help`,
   gunicorn's `preload_app` setting, uvicorn's `_subprocess.py`.
@@ -510,7 +510,7 @@ Binder has no free-threaded interpreter.
 - Format: two terminals and files, viewer area. Ships `work.py`,
   `load.py` and `docs/processes-and-threads.md`.
 
-- Requires: `muru==0.1.0a12`, `muructl==0.1.0a12`; `curl`.
+- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`; `curl`.
 
 - Source: `docs/explanation/process-models.md`, gunicorn's design
   documentation, Granian's README, mod_wsgi's `WSGIDaemonProcess`
@@ -555,7 +555,7 @@ closes it with `by=edge code=1001` at once.
   `docs/two-interfaces.md`. Variables `app_port` (8080) and
   `dashboard_port` (8081).
 
-- Requires: `muru==0.1.0a12`, `muructl==0.1.0a12`, `flask==3.1.3`,
+- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`, `flask==3.1.3`,
   `fastapi==0.162.0`, `websockets==17.3`; `curl`.
 
 - Source: `docs/howto/mounts.md`, `docs/howto/starlette-and-fastapi.md`,
@@ -592,7 +592,7 @@ on serving), and shuts the daemon down.
   `releases/v2`, `traffic.py`, `show_processes.py` and
   `docs/deploying.md`.
 
-- Requires: `muru==0.1.0a12`, `muructl==0.1.0a12`; `curl`, `ps`.
+- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`; `curl`, `ps`.
   Variables `app_port` (8080) and `muru_run_dir` (`/tmp/muru-deploy`).
 
 - Source: `docs/howto/daemon.md`, gunicorn's signals documentation.
@@ -622,7 +622,7 @@ down.
 - Format: two terminals and files, viewer area. Ships `releases/v1`
   to `v3`, `routes.toml`, `traffic.py` and `docs/canary.md`.
 
-- Requires: `muru==0.1.0a12`, `muructl==0.1.0a12`; `curl`. Variables
+- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`; `curl`. Variables
   `app_port` (8080) and `muru_run_dir` (`/tmp/muru-canary`).
 
 - Source: `docs/howto/rollouts.md`, `docs/howto/traffic.md`.
@@ -656,7 +656,7 @@ the daemon down.
   application, static files with a `.gz` variant, a report, two error
   pages), `site.toml` and `docs/nginx-and-the-edge.md`.
 
-- Requires: `muru==0.1.0a12`, `muructl==0.1.0a12`; `curl`, `sed`.
+- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`; `curl`, `sed`.
   Variables `app_port` (8080) and `muru_run_dir` (`/tmp/muru-edge`).
 
 - Source: `docs/howto/static-files.md`, `compression.md`,
@@ -688,7 +688,7 @@ another server.
   `routes.toml`, `traffic.py`, `show_processes.py` and
   `docs/cutting-over.md`.
 
-- Requires: `muru==0.1.0a12`, `muructl==0.1.0a12`, `gunicorn==26.2.0`;
+- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`, `gunicorn==26.2.0`;
   `curl`, `ps`. Variables `app_port` (8080) and `muru_run_dir`
   (`/tmp/muru-server`).
 
@@ -741,6 +741,38 @@ page helps. The framework workshops (2 to 4) can be taken in any order
 after the first; a learner who uses only one framework takes that one.
 Each edits the project through actions (`file-write` appends,
 `editor-insert`, `editor-replace`), so the learner still types nothing.
+
+### What was checked against 0.1.0a15
+
+Checked on CPython 3.14 in a scratch environment, and self-tested on
+CPython 3.14, macOS, on 2026-11-02, when the pins moved from 0.1.0a12
+to 0.1.0a15 (the a12 record below stands for what it does not
+restate):
+
+- A development run's first line is now `muru: runtime library
+  0.1.0a15 from the environment`, or the second after `muru: using
+  [tool.muru] from ...` when the project has a table. The rest of the
+  startup lines read as the a12 record says. Workshop I.2 names the new
+  line.
+
+- Lines written to a file, and what `muructl logs` prints, start with
+  the full UTC time (`2026-11-02T07:48:54.891Z`); lines in a terminal
+  do not. Every check matches within a line, so the time changes none.
+
+- The stricter names of 0.1.0a14 (lowercase letters, digits and
+  hyphens for classes, rate limits, mounts, groups and environment
+  variables) refuse nothing a workshop writes.
+
+- Commands, `muructl exec`, the MCP server, handoff between WSGI and
+  ASGI, `muructl build`, `muructl check` and `muructl serve` are new
+  and taught nowhere yet.
+
+- On Linux with CPython 3.14, `muructl debug stacks` reads a worker
+  from outside and loses every frame below the first call from C into
+  Python (muruhq/muru#306), so a request waiting at `breakpoint()`
+  shows Muru's hook and not `checkout.py`. Workshop II.8's
+  `request-waiting` check fails there, on CI and on Binder, and passes
+  on macOS and on 3.15.
 
 ### What was checked against 0.1.0a12
 
@@ -1419,11 +1451,11 @@ workshop is in the index and the README, and its entry here is true.
   the daemon did not answer. A relative run directory lets the daemon
   start but not a release, whose workers never come up. Worked around
   with `muru_run_dir` under `/tmp`; see the decision on daemon state.
-  GrahamDumpleton/muru#82 makes the daemon say so at start.
+  muruhq/muru#82 makes the daemon say so at start.
 
 - **A breakpoint under `muructl run` could not be attached to** up to
   0.1.0a10: the debug commands went through the daemon and answered
-  `no daemon is running`. Fixed in 0.1.0a11 (GrahamDumpleton/muru#68
+  `no daemon is running`. Fixed in 0.1.0a11 (muruhq/muru#68
   and #69): the run has an admin socket, and workshop II.8 attaches.
 
 - **The course scaffold's welcome messages repeat the description.**

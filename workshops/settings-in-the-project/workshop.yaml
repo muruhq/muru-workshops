@@ -4,8 +4,8 @@ title: Keep the run settings with the project
 version: 0.1.0
 description: Move a long muructl run command line into the project's [tool.muru] table, put how a checkout is served into [tool.muru.run] and one machine's own port into muru.local.toml, see what a flag or a misspelt key does, and what --print-config makes of it all for the daemon, compared with where gunicorn, uvicorn, Granian and mod_wsgi keep their settings.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/settings-in-the-project
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/settings-in-the-project
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, configuration, pyproject, python]
 duration: 25m
 platforms: [linux, macos]

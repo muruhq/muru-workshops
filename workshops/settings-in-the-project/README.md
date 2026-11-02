@@ -14,5 +14,5 @@ keep their settings.
 
 About 25 minutes, in two terminals with a document and the project's
 files in an area above them. It installs `muru` and `muructl`
-0.1.0a12 into an environment of its own, and serves on ports 8080 and
+0.1.0a15 into an environment of its own, and serves on ports 8080 and
 8090 unless you change them.

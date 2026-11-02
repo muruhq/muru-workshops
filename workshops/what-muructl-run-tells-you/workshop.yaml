@@ -4,8 +4,8 @@ title: Serve an app and read what it tells you
 version: 0.1.0
 description: Serve a small Flask application under muructl run and read what it reports while you develop, from the startup lines and the access log to your code's output tagged by worker, error pages with the traceback for browsers and API clients, and the dashboard, compared with what gunicorn and uvicorn report.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/what-muructl-run-tells-you
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/what-muructl-run-tells-you
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, flask, wsgi, logging, python]
 duration: 25m
 platforms: [linux, macos]

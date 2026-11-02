@@ -9,6 +9,6 @@ ends with when to choose which server. This is the one workshop that
 installs another server, because running it is the point.
 
 About 30 minutes, in two terminals with a document and the code in an
-area above them. It installs `muru` and `muructl` 0.1.0a12 and gunicorn
+area above them. It installs `muru` and `muructl` 0.1.0a15 and gunicorn
 into an environment of its own, serves on port 8080 unless you change
 it, and keeps the daemon's sockets in `/tmp/muru-server`.

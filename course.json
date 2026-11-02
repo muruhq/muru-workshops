@@ -11,7 +11,7 @@
     }
   ],
   "idPrefix": "grahamdumpleton.me",
-  "repository": "https://github.com/GrahamDumpleton/muru-workshops",
+  "repository": "https://github.com/muruhq/muru-workshops",
   "lite": false,
   "python": "3.14",
   "jupyterlab-workshop": "0.30.0",

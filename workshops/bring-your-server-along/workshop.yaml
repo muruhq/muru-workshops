@@ -4,8 +4,8 @@ title: Try Muru without changing your deployment
 version: 0.1.0
 description: Run an application's existing gunicorn command unchanged as a managed release under the Muru daemon, deploy the same application beside it as Muru's own workers, preview them, move the traffic across with a canary judged against gunicorn's numbers, and roll back to gunicorn at once, then sum up when to choose which server.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/bring-your-server-along
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/bring-your-server-along
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, gunicorn, migration, daemon, canary, python]
 duration: 30m
 platforms: [linux, macos]

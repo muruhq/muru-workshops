@@ -18,7 +18,7 @@ your workspace, and nothing you do here needs you to type code.
 Muru comes in two parts: `muructl`, the command, and `muru`, the
 runtime library that runs inside your application's Python. This
 workshop has an environment of its own with both installed, at release
-0.1.0a12. Create it first; it takes a minute.
+0.1.0a15. Create it first; it takes a minute.
 
 ```{environment-create}
 :title: Create the workshop environment

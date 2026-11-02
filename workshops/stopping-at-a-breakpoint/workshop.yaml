@@ -4,8 +4,8 @@ title: Stop a request at a breakpoint
 version: 0.1.0
 description: Put breakpoint() in a request served by muructl run, see the worker wait for a debugger while the timeouts stand aside, attach pdb to it from another terminal, read and change what the request is about to do, let it go on, watch a breakpoint nobody attaches to expire, and open a session in a worker with no breakpoint waiting, compared with what breakpoint() does under flask run, runserver, gunicorn and mod_wsgi.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/stopping-at-a-breakpoint
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/stopping-at-a-breakpoint
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, debugging, pdb, python]
 duration: 20m
 platforms: [linux, macos]

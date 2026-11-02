@@ -13,5 +13,5 @@ its own and changes that one worker's state. Compares with what
 mod_wsgi.
 
 About 20 minutes, in two terminals with a document and the code in an
-area above them. It installs `muru` and `muructl` 0.1.0a12 into an
+area above them. It installs `muru` and `muructl` 0.1.0a15 into an
 environment of its own, and serves on port 8080 unless you change it.

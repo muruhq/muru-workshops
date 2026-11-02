@@ -38,6 +38,10 @@ muructl run shop:app --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_po
 
 Read the startup lines from the top:
 
+- `muru: runtime library ... from the environment` is `muructl`
+  finding the `muru` package installed beside Flask, the part of Muru
+  that runs inside your application's Python.
+
 - `muru.host[...]: preloaded shop:app` is the host, which imported
   `shop.py` once. The number in brackets is the host's process id.
 

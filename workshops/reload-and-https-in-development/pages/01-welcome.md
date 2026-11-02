@@ -18,7 +18,7 @@ Nothing you do here needs you to type code: every change to it comes
 from an action.
 
 This workshop has an environment of its own with `muru` and `muructl`
-installed, at release 0.1.0a12. Create it first; it takes a minute.
+installed, at release 0.1.0a15. Create it first; it takes a minute.
 
 ```{environment-create}
 :title: Create the workshop environment

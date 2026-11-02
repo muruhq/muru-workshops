@@ -4,8 +4,8 @@ title: Hooks from load to exit
 version: 0.1.0
 description: Run a hooks module with all seven of Muru's lifecycle hooks and read from the terminal where and when each one runs, through startup, a reload that replaces the workers, a signal to reopen logs, workers that import the application themselves, and an ASGI application's lifespan, compared with gunicorn's server hooks.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/every-hook-in-order
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/every-hook-in-order
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, hooks, wsgi, asgi, python]
 duration: 25m
 platforms: [linux, macos]

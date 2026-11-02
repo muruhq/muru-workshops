@@ -4,8 +4,8 @@ title: When a request hangs
 version: 0.1.0
 description: Find out what Muru does with a request that never finishes, from the soft timeout that interrupts Python code and says where it was, to the hard timeout that replaces a worker whose code swallows it and the GIL stall timeout that replaces one stuck in C code holding the GIL, and keep the access log to what needs attention, compared with gunicorn, uvicorn and mod_wsgi.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/when-a-request-hangs
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/when-a-request-hangs
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, timeouts, gil, logging, python]
 duration: 25m
 platforms: [linux, macos]

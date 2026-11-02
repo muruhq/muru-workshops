@@ -4,8 +4,8 @@ title: A Django project under muructl run
 version: 0.1.0
 description: Serve a Django project from its wsgi.py under muructl run, reloading on each change, find out why the admin has no styles outside runserver and serve its static files in development, choose between Django's debug page and Muru's error page for a failing view, then serve the same project from asgi.py and see where sync and async views run, compared with runserver, gunicorn, uvicorn and mod_wsgi.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/serving-a-django-project
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/serving-a-django-project
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, django, wsgi, asgi, python]
 duration: 30m
 platforms: [linux, macos]

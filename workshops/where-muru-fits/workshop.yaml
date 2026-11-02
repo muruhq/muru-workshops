@@ -4,8 +4,8 @@ title: Where Muru fits among Python web servers
 version: 0.1.0
 description: See how Apache with mod_wsgi, gunicorn, uvicorn and Granian divide the work of serving a Python web application, then serve one under muructl run and look at the processes Muru uses instead, what each one does, and what happens when a request or a worker fails.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/where-muru-fits
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/where-muru-fits
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, wsgi, python, deployment]
 duration: 25m
 platforms: [linux, macos]

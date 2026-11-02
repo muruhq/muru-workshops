@@ -12,5 +12,5 @@ threads. Compares with `runserver`, gunicorn, uvicorn and mod_wsgi.
 
 About 30 minutes, in two terminals with a document, the project's
 files and the site in a pane above them. It installs `muru` and
-`muructl` 0.1.0a12 and Django 6.1.2 into an environment of its own,
+`muructl` 0.1.0a15 and Django 6.1.2 into an environment of its own,
 and serves on port 8080 unless you change it.

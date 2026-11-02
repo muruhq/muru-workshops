@@ -4,8 +4,8 @@ title: A Flask project under muructl run
 version: 0.1.0
 description: Serve a Flask project built by an application factory under muructl run, see why the factory has to be named as one, give each worker a database pool of its own and see what sharing one from the host means, turn on the project's own logging, let Muru answer for a failing view, and hand the static files from Flask to the edge, compared with what flask run, gunicorn and mod_wsgi do with a factory.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/serving-a-flask-project
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/serving-a-flask-project
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, flask, wsgi, python]
 duration: 25m
 platforms: [linux, macos]

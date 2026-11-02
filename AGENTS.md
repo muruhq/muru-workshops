@@ -3,7 +3,7 @@
 ## Project
 
 This repository is a course: guided JupyterLab workshops on
-[Muru](https://github.com/GrahamDumpleton/muru), the routing edge,
+[Muru](https://github.com/muruhq/muru), the routing edge,
 control plane and Python runtime for WSGI and ASGI applications. The
 workshops run on the jupyterlab-workshop extension: each is a
 directory under `workshops/` holding a `workshop.yaml` manifest and
@@ -49,7 +49,7 @@ be committed.
 
 Pending work is tracked as GitHub issues, not in files. A problem in
 Muru found while writing a workshop (a bug, or something clumsy to use)
-is an issue in GrahamDumpleton/muru. A workshop that works around it,
+is an issue in muruhq/muru. A workshop that works around it,
 or will need changing once it is fixed, gets an issue here marked as
 blocked by the Muru one, saying the workshop and page, the workaround in
 place and what to change; it starts when the fix is in a release on
@@ -80,7 +80,7 @@ Muru is not installed in this project's environment. To try something
 against the release the workshops teach, make a scratch environment
 outside the repository and install the pinned versions into it, for
 example `uv venv /tmp/m && uv pip install --python /tmp/m/bin/python
-muru==0.1.0a12 muructl==0.1.0a12`, then run `muructl` from it with
+muru==0.1.0a15 muructl==0.1.0a15`, then run `muructl` from it with
 `VIRTUAL_ENV` set. Use loopback ports that nothing else uses, and stop
 every server you start by its own process id, never with a pattern
 that could match the user's own processes. Check behaviour against the
@@ -111,7 +111,7 @@ servers and run terminals, which JupyterLite cannot.
 
 - Each workshop declares an `environment` with a `requirements.txt`
   pinning `muru` and `muructl` to the release in `reference/muru`,
-  written the PyPI way (`0.1.0a12`), plus anything else it needs, such
+  written the PyPI way (`0.1.0a15`), plus anything else it needs, such
   as a framework. Nothing taught goes in `pyproject.toml`. The welcome
   page carries `environment-create` as its first step, and the
   environment is then first on `PATH` in the terminals, so `muructl`

@@ -4,8 +4,8 @@ title: Deploy without dropping a request
 version: 0.1.0
 description: Start the Muru daemon, deploy a release, then deploy the next one and roll back while a steady stream of requests runs, with no request going unanswered, and look at the daemon, the edge and each release's host and workers, compared with gunicorn's HUP, a mod_wsgi restart and two deployments behind a load balancer.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/deploying-without-downtime
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/deploying-without-downtime
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, deployment, daemon, rollback, python]
 duration: 30m
 platforms: [linux, macos]

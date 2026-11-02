@@ -1,12 +1,12 @@
 # Muru workshops
 
-[![Launch on Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/GrahamDumpleton/muru-workshops/main?urlpath=lab)
-[![Open in GitHub Codespaces](https://img.shields.io/badge/launch-codespaces-579ACA?logo=github&logoColor=white)](https://codespaces.new/GrahamDumpleton/muru-workshops?quickstart=1)
-[![test](https://github.com/GrahamDumpleton/muru-workshops/actions/workflows/test.yml/badge.svg)](https://github.com/GrahamDumpleton/muru-workshops/actions/workflows/test.yml)
+[![Launch on Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/muruhq/muru-workshops/main?urlpath=lab)
+[![Open in GitHub Codespaces](https://img.shields.io/badge/launch-codespaces-579ACA?logo=github&logoColor=white)](https://codespaces.new/muruhq/muru-workshops?quickstart=1)
+[![test](https://github.com/muruhq/muru-workshops/actions/workflows/test.yml/badge.svg)](https://github.com/muruhq/muru-workshops/actions/workflows/test.yml)
 
-Nothing to install: start the workshops on [mybinder.org](https://mybinder.org/v2/gh/GrahamDumpleton/muru-workshops/main?urlpath=lab) with no account, or in [GitHub Codespaces](https://codespaces.new/GrahamDumpleton/muru-workshops?quickstart=1) with a GitHub account.
+Nothing to install: start the workshops on [mybinder.org](https://mybinder.org/v2/gh/muruhq/muru-workshops/main?urlpath=lab) with no account, or in [GitHub Codespaces](https://codespaces.new/muruhq/muru-workshops?quickstart=1) with a GitHub account.
 
-Guided JupyterLab workshops on [Muru](https://github.com/GrahamDumpleton/muru),
+Guided JupyterLab workshops on [Muru](https://github.com/muruhq/muru),
 a routing edge, control plane and Python runtime for serving WSGI and
 ASGI applications, with zero-downtime releases, traffic management and
 Python-aware process management. They are for Python web developers who
@@ -34,7 +34,7 @@ all.
 Where Muru fits among Python web servers, what it does while you
 develop, and how its daemon deploys releases without downtime, compared
 throughout with Apache and mod_wsgi, gunicorn, uvicorn and Granian.
-Each workshop installs Muru 0.1.0a12 into an environment of its own and
+Each workshop installs Muru 0.1.0a15 into an environment of its own and
 runs it in two terminals, with documents and the application shown
 above them. Workshops 7 to 10 run the daemon, which keeps its state
 in the workspace and its sockets in a short directory under `/tmp`.
@@ -111,7 +111,7 @@ A Flask, Django or FastAPI project taken through development under
 `muructl run` in depth: where its settings live, what each framework
 needs, the hooks around the fork, reload and HTTPS fitted to a real
 project, and what happens when a request hangs. Each workshop installs
-Muru 0.1.0a12, and the framework it teaches, into an environment of
+Muru 0.1.0a15, and the framework it teaches, into an environment of
 its own, and names the Meet Muru workshop it builds on. Workshops 2 to
 4 can be taken in any order, or only the one for your framework.
 
@@ -190,9 +190,9 @@ In a JupyterLab with the extension installed, subscribe to the catalog
 or to one collection from the workshop browser's Collections dialog:
 
 ```
-https://raw.githubusercontent.com/GrahamDumpleton/muru-workshops/main/catalog.json
-https://raw.githubusercontent.com/GrahamDumpleton/muru-workshops/main/collections/introduction/collection.json
-https://raw.githubusercontent.com/GrahamDumpleton/muru-workshops/main/collections/developing/collection.json
+https://raw.githubusercontent.com/muruhq/muru-workshops/main/catalog.json
+https://raw.githubusercontent.com/muruhq/muru-workshops/main/collections/introduction/collection.json
+https://raw.githubusercontent.com/muruhq/muru-workshops/main/collections/developing/collection.json
 ```
 
 ## What is in the repository
@@ -228,6 +228,6 @@ order the Justfile gives.
 `just bump <version>` moves to a new release of the extension,
 refreshes the files the scaffold wrote and moves its reference
 checkout. `just bump-muru <tag>` moves `reference/muru` to a Muru
-release tag, such as `v0.1.0-alpha.12`; then update `muru` and `muructl`
+release tag, such as `v0.1.0-alpha.15`; then update `muru` and `muructl`
 in every `workshops/*/requirements.txt` to the same release and run
 `just test-all`.

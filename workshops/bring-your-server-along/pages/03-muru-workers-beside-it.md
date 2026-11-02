@@ -25,7 +25,7 @@ muructl release list orders
 
 `r1` is gunicorn and serves; `r2` is two Muru workers of four threads,
 held. Everyone still gets gunicorn. A preview of `r2` gets Muru, which
-names itself `muru/0.1.0a12`.
+names itself `muru/0.1.0a15`.
 
 ```{execute}
 :id: curl-both

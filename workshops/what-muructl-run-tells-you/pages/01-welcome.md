@@ -17,7 +17,7 @@ The application is a small Flask shop, `shop.py`, already in your
 workspace. Nothing you do here needs you to type code.
 
 This workshop has an environment of its own with `muru`, `muructl` and
-Flask installed, at Muru release 0.1.0a12. Create it first; it takes a
+Flask installed, at Muru release 0.1.0a15. Create it first; it takes a
 minute.
 
 ```{environment-create}

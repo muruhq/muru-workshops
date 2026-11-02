@@ -16,7 +16,7 @@ The two versions of the application are in `releases/v1` and
 code.
 
 This workshop has an environment of its own with `muru` and `muructl`
-installed, at release 0.1.0a12. Create it first; it takes a minute.
+installed, at release 0.1.0a15. Create it first; it takes a minute.
 
 ```{environment-create}
 :title: Create the workshop environment

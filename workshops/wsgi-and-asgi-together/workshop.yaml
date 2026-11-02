@@ -4,8 +4,8 @@ title: WSGI and ASGI from one server
 version: 0.1.0
 description: Serve a Flask application at / and a FastAPI application at /api from the same Muru workers, declared as mounts in pyproject.toml, see what prefix each one sees, and talk to the FastAPI side over WebSockets from the browser and the terminal, with each socket in the access log and on the dashboard, compared with the two servers and the proxy the same site usually takes.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/wsgi-and-asgi-together
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/wsgi-and-asgi-together
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, wsgi, asgi, flask, fastapi, websocket, python]
 duration: 25m
 platforms: [linux, macos]

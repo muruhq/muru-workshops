@@ -4,8 +4,8 @@ title: Import once, fork safely
 version: 0.1.0
 description: See what a fork leaves behind when an application opens a socket and starts a thread at import, as under gunicorn --preload, then watch Muru's import check find both before it forks, fall back or refuse to start, and move the work into a post_fork hook so the workers are forked from a preloaded host again.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/import-once-fork-safely
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/import-once-fork-safely
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, wsgi, preload, fork, python]
 duration: 25m
 platforms: [linux, macos]

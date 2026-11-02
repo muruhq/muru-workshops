@@ -4,8 +4,8 @@ title: What you would have put nginx in front for
 version: 0.1.0
 description: Serve a shop on the Muru daemon from one configuration file, and check with curl what the edge does that nginx in front of an application server usually does, static files with conditional requests and precompressed variants, compressed responses, a file the application chooses, the site's own error pages and a maintenance page, beside the nginx configuration each one replaces.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/what-nginx-was-for
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/what-nginx-was-for
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, nginx, static-files, compression, daemon, python]
 duration: 30m
 platforms: [linux, macos]

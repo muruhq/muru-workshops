@@ -3,7 +3,7 @@
   "id": "grahamdumpleton.me/muru/developing",
   "title": "Developing with muructl run",
   "description": "Guided JupyterLab workshops on developing a Flask, Django or FastAPI project under muructl run: where its settings live, what each framework needs, the hooks around the fork, reload and HTTPS fitted to a real project, what happens when a request hangs, and a request stopped at a breakpoint.",
-  "homepage": "https://github.com/GrahamDumpleton/muru-workshops",
+  "homepage": "https://github.com/muruhq/muru-workshops",
   "ordered": true,
   "analytics": {
     "sink": "https://workshop-analytics.grumpys.work/events",
@@ -35,13 +35,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/settings-in-the-project",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/settings-in-the-project",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/settings-in-the-project"
           }
@@ -74,13 +74,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/serving-a-flask-project",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/serving-a-flask-project",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/serving-a-flask-project"
           }
@@ -114,13 +114,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/serving-a-django-project",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/serving-a-django-project",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/serving-a-django-project"
           }
@@ -154,13 +154,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/fastapi-on-the-event-loop",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/fastapi-on-the-event-loop",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/fastapi-on-the-event-loop"
           }
@@ -193,13 +193,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/every-hook-in-order",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/every-hook-in-order",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/every-hook-in-order"
           }
@@ -232,13 +232,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/reload-and-https-your-way",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/reload-and-https-your-way",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/reload-and-https-your-way"
           }
@@ -270,13 +270,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/when-a-request-hangs",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/when-a-request-hangs",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/when-a-request-hangs"
           }
@@ -307,13 +307,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/stopping-at-a-breakpoint",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/stopping-at-a-breakpoint",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/stopping-at-a-breakpoint"
           }

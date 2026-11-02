@@ -4,8 +4,8 @@ title: Canary a release and let it roll back
 version: 0.1.0
 description: Hold a new release beside the serving one on the Muru daemon, preview it with a header, canary it through 10% and 50% of a steady stream of requests until it is promoted, then canary a release with a bug and watch its error rate gate roll it back on its own, compared with a canary built from two deployments and a load balancer.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/canary-a-release
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/canary-a-release
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, deployment, daemon, canary, rollout, python]
 duration: 30m
 platforms: [linux, macos]

@@ -4,8 +4,8 @@ title: FastAPI and Starlette on the event loop
 version: 0.1.0
 description: Serve a FastAPI application under muructl run and find out what runs where on a worker's event loop, from the lifespan that runs once in each worker to async def, plain def and asyncio.to_thread path operations under load, then block the loop and watch the loop stall timeout replace the worker, compared with uvicorn and gunicorn.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/fastapi-on-the-event-loop
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/fastapi-on-the-event-loop
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, fastapi, starlette, asgi, asyncio, python]
 duration: 30m
 platforms: [linux, macos]

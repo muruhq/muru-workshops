@@ -16,7 +16,7 @@ it is the point. The application, an orders service, is in `orders/`
 in your workspace. Nothing you do here needs you to type code.
 
 This workshop has an environment of its own with `muru` and `muructl`
-installed, at release 0.1.0a12, and gunicorn 26.2.0. Create it first;
+installed, at release 0.1.0a15, and gunicorn 26.2.0. Create it first;
 it takes a minute.
 
 ```{environment-create}

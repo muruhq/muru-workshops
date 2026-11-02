@@ -9,5 +9,5 @@ and how the same split lets the daemon run releases side by side.
 
 About 25 minutes, in two terminals with the documents and the
 application in a pane above them. It installs `muru` and `muructl`
-0.1.0a12 into an environment of its own, and serves on port 8080 unless
+0.1.0a15 into an environment of its own, and serves on port 8080 unless
 you change it.

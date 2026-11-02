@@ -3,7 +3,7 @@
   "id": "grahamdumpleton.me/muru/introduction",
   "title": "Meet Muru",
   "description": "Guided JupyterLab workshops introducing Muru: where it fits among Python web servers, what it does while you develop, and how its daemon deploys releases without downtime, compared throughout with Apache and mod_wsgi, gunicorn, uvicorn and Granian.",
-  "homepage": "https://github.com/GrahamDumpleton/muru-workshops",
+  "homepage": "https://github.com/muruhq/muru-workshops",
   "ordered": true,
   "analytics": {
     "sink": "https://workshop-analytics.grumpys.work/events",
@@ -35,13 +35,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/where-muru-fits",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/where-muru-fits",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/where-muru-fits"
           }
@@ -74,13 +74,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/what-muructl-run-tells-you",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/what-muructl-run-tells-you",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/what-muructl-run-tells-you"
           }
@@ -114,13 +114,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/reload-and-https-in-development",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/reload-and-https-in-development",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/reload-and-https-in-development"
           }
@@ -153,13 +153,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/import-once-fork-safely",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/import-once-fork-safely",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/import-once-fork-safely"
           }
@@ -192,13 +192,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/processes-threads-and-the-gil",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/processes-threads-and-the-gil",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/processes-threads-and-the-gil"
           }
@@ -233,13 +233,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/wsgi-and-asgi-together",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/wsgi-and-asgi-together",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/wsgi-and-asgi-together"
           }
@@ -271,13 +271,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/deploying-without-downtime",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/deploying-without-downtime",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/deploying-without-downtime"
           }
@@ -310,13 +310,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/canary-a-release",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/canary-a-release",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/canary-a-release"
           }
@@ -349,13 +349,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/what-nginx-was-for",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/what-nginx-was-for",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/what-nginx-was-for"
           }
@@ -388,13 +388,13 @@
       "authors": [
         "Graham Dumpleton"
       ],
-      "homepage": "https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/bring-your-server-along",
-      "issues": "https://github.com/GrahamDumpleton/muru-workshops/issues",
+      "homepage": "https://github.com/muruhq/muru-workshops/tree/main/workshops/bring-your-server-along",
+      "issues": "https://github.com/muruhq/muru-workshops/issues",
       "versions": [
         {
           "version": "0.1.0",
           "source": {
-            "git": "https://github.com/GrahamDumpleton/muru-workshops",
+            "git": "https://github.com/muruhq/muru-workshops",
             "ref": "main",
             "subdir": "workshops/bring-your-server-along"
           }

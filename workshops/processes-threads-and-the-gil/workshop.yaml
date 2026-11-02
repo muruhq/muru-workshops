@@ -4,8 +4,8 @@ title: Processes, threads and the GIL
 version: 0.1.0
 description: Map gunicorn's, mod_wsgi's, uvicorn's and Granian's process and thread settings onto Muru's, then load a view that waits and a view that computes under one thread, eight threads, and two processes of four, and read from the edge's queue and app times which of them helps and why.
 authors: [Graham Dumpleton]
-homepage: https://github.com/GrahamDumpleton/muru-workshops/tree/main/workshops/processes-threads-and-the-gil
-issues: https://github.com/GrahamDumpleton/muru-workshops/issues
+homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/processes-threads-and-the-gil
+issues: https://github.com/muruhq/muru-workshops/issues
 tags: [muru, wsgi, threads, gil, performance, python]
 duration: 30m
 platforms: [linux, macos]
