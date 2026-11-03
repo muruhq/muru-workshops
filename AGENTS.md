@@ -60,6 +60,15 @@ not added to it automatically, so add each one with `gh project
 item-add` and set its Status, Priority and Size, following the board
 rules in Muru's AGENTS.md.
 
+Every problem found along the way gets an issue when it is found, in
+whichever repository it belongs to, without waiting to be asked: a Muru
+bug or clumsy behaviour, a workshop that still has a gap, a setup step
+that could not be tested. Mentioning it in a report is not enough. When
+an issue cannot be created, because the call is refused or blocked,
+keep a list of the problems still without one and repeat it at the end
+of every report, each with its title and body ready to file, until
+every one has an issue.
+
 ## Source material
 
 What Muru does and how it works comes from its own documentation and
