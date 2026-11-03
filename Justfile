@@ -174,14 +174,14 @@ bump VERSION:
 # reference/muru is the documentation and source of the release the
 # workshops teach. Its tags are v0.1.0-alpha.10 where PyPI says
 # 0.1.0a10, so the tag is given as it is in the repository. Every
-# workshop pins muru and muructl in its own requirements.txt, which
-# this does not touch.
-# Move the Muru reference checkout to a release tag, such as v0.1.0-alpha.15.
+# workshop pins muructl in its own requirements.txt, which this does
+# not touch.
+# Move the Muru reference checkout to a release tag, such as v0.1.0-alpha.16.
 bump-muru TAG:
     git -C reference/muru fetch --tags
     git -C reference/muru checkout "{{TAG}}"
     git add reference/muru
-    @echo "Now update muru and muructl in every workshops/*/requirements.txt, then just test-all"
+    @echo "Now update muructl in every workshops/*/requirements.txt, then just test-all"
 
 # A workshop's kernelspec is registered for the user, outside the
 # checkout, so removing the environment directory leaves a kernel in

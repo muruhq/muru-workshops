@@ -39,6 +39,22 @@ cat > "${HOME}/.config/pip/pip.conf" <<CONF
 find-links = ${wheels}
 CONF
 
+# muructl supplies the runtime library, muru, itself: the first run on
+# an interpreter unpacks the copy matching muructl's version into its
+# user cache, fetching the wheel from PyPI. Fill the cache now for this
+# Python, which the workshops' environments are made from, so the first
+# run in a session fetches nothing. muructl, installed from the
+# wheelhouse into a throwaway directory, checks a one-line application,
+# which provides the library as a run would.
+prefill="$(mktemp -d)"
+
+grep -h '^muructl==' workshops/*/requirements.txt | sort -u > "$prefill/requirements.txt"
+python -m pip install --disable-pip-version-check --no-index --find-links "$wheels" \
+  --target "$prefill/muructl" -r "$prefill/requirements.txt"
+printf 'def application(environ, start_response):\n    start_response("200 OK", [])\n    return [b""]\n' > "$prefill/app.py"
+(cd "$prefill" && "$prefill/muructl/bin/muructl" check app:application --python "$(command -v python)")
+rm -rf "$prefill"
+
 # The overrides live in JupyterLab's application settings directory. Ask
 # JupyterLab for it rather than assuming the Python prefix, and use sudo
 # for a directory this user cannot write.

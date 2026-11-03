@@ -11,5 +11,5 @@ preloaded host again. Compares with gunicorn, mod_wsgi and uvicorn in a
 short document with diagrams.
 
 About 25 minutes, in two terminals with a document and the application
-in an area above them. It installs `muru` and `muructl` 0.1.0a15 into an
+in an area above them. It installs `muructl` 0.1.0a16 into an
 environment of its own, and serves on port 8080 unless you change it.

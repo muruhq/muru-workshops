@@ -17,8 +17,8 @@ responses say which release served them and how the request arrived.
 Nothing you do here needs you to type code: every change to it comes
 from an action.
 
-This workshop has an environment of its own with `muru` and `muructl`
-installed, at release 0.1.0a15. Create it first; it takes a minute.
+This workshop has an environment of its own with `muructl` installed, at
+release 0.1.0a16. Create it first; it takes a minute.
 
 ```{environment-create}
 :title: Create the workshop environment

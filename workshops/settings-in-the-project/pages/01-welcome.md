@@ -16,8 +16,8 @@ The project, a small WSGI application in the `notes` directory of your
 workspace, is already there. Nothing you do here needs you to type
 code.
 
-This workshop has an environment of its own with `muru` and `muructl`
-installed, at release 0.1.0a15. Create it first; it takes a minute.
+This workshop has an environment of its own with `muructl` installed, at
+release 0.1.0a16. Create it first; it takes a minute.
 
 ```{environment-create}
 :title: Create the workshop environment

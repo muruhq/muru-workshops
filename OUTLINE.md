@@ -43,8 +43,8 @@ Everything the workshops say about Muru comes from its documentation,
 its source and the installed release, never from memory.
 
 - `reference/muru` is a git submodule of the Muru repository at the
-  tag of the release the workshops teach, `v0.1.0-alpha.15` (published
-  on PyPI as 0.1.0a15). The user documentation under `docs/tutorials`,
+  tag of the release the workshops teach, `v0.1.0-alpha.16` (published
+  on PyPI as 0.1.0a16). The user documentation under `docs/tutorials`,
   `docs/explanation` and `docs/howto` is authoritative for released
   behaviour. `CHANGELOG.md` says which release added what, which is how
   to tell whether a feature is released. The design specification
@@ -310,8 +310,7 @@ showed.
 Which process talks to clients, which runs your code, and what does
 new code take, under the servers you know and under Muru?
 
-The welcome page creates the environment (`muru` and `muructl`
-0.1.0a10) and runs `muructl --version`. Page 2 opens
+The welcome page creates the environment (`muructl`) and runs `muructl --version`. Page 2 opens
 `docs/serving-python.md` in the viewer area: Apache with mod_wsgi
 (embedded and daemon mode), nginx in front of gunicorn (arbiter,
 workers that accept on the shared socket, `sync` and `gthread`,
@@ -350,7 +349,7 @@ show the development run as a release table, and stops the server.
   `show_processes.py`, `docs/serving-python.md`,
   `docs/muru-processes.md` and `docs/releases.md`.
 
-- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`; `curl` and `ps`.
+- Requires: `muructl==0.1.0a16`; `curl` and `ps`.
 
 - Source: `docs/explanation/architecture.md`,
   `docs/tutorials/first-wsgi-app.md`, `docs/howto/daemon.md`, and the
@@ -390,7 +389,7 @@ one), sends five rounds, describes what it shows, and stops the shop.
 - Format: two terminals and files, viewer area. Ships `shop.py`,
   `send_requests.py` and `docs/where-output-goes.md`.
 
-- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`, `flask==3.1.3`;
+- Requires: `muructl==0.1.0a16`, `flask==3.1.3`;
   `curl`. Variables `app_port` (8080) and `dashboard_port` (8081).
 
 - Source: `docs/tutorials/first-wsgi-app.md`, `docs/howto/logging.md`,
@@ -434,7 +433,7 @@ and is self-signed on every machine.
 - Format: two terminals and files, viewer area. Ships `greeting.py`,
   `watch.py` and `docs/reloading.md`.
 
-- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`; `curl`. Variables
+- Requires: `muructl==0.1.0a16`; `curl`. Variables
   `app_port` (8080) and `https_port` (8443).
 
 - Source: `docs/tutorials/first-wsgi-app.md`, `docs/howto/https.md`,
@@ -476,7 +475,7 @@ and stops the server.
   `catalog.py`, `hooks.py`, `fork_demo.py` and
   `docs/preload-and-fork.md`.
 
-- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`; `curl`.
+- Requires: `muructl==0.1.0a16`; `curl`.
 
 - Source: `docs/explanation/preload.md`, `muructl run --help`,
   gunicorn's `preload_app` setting, uvicorn's `_subprocess.py`.
@@ -510,7 +509,7 @@ Binder has no free-threaded interpreter.
 - Format: two terminals and files, viewer area. Ships `work.py`,
   `load.py` and `docs/processes-and-threads.md`.
 
-- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`; `curl`.
+- Requires: `muructl==0.1.0a16`; `curl`.
 
 - Source: `docs/explanation/process-models.md`, gunicorn's design
   documentation, Granian's README, mod_wsgi's `WSGIDaemonProcess`
@@ -555,7 +554,7 @@ closes it with `by=edge code=1001` at once.
   `docs/two-interfaces.md`. Variables `app_port` (8080) and
   `dashboard_port` (8081).
 
-- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`, `flask==3.1.3`,
+- Requires: `muructl==0.1.0a16`, `flask==3.1.3`,
   `fastapi==0.162.0`, `websockets==17.3`; `curl`.
 
 - Source: `docs/howto/mounts.md`, `docs/howto/starlette-and-fastapi.md`,
@@ -592,7 +591,7 @@ on serving), and shuts the daemon down.
   `releases/v2`, `traffic.py`, `show_processes.py` and
   `docs/deploying.md`.
 
-- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`; `curl`, `ps`.
+- Requires: `muructl==0.1.0a16`; `curl`, `ps`.
   Variables `app_port` (8080) and `muru_run_dir` (`/tmp/muru-deploy`).
 
 - Source: `docs/howto/daemon.md`, gunicorn's signals documentation.
@@ -622,7 +621,7 @@ down.
 - Format: two terminals and files, viewer area. Ships `releases/v1`
   to `v3`, `routes.toml`, `traffic.py` and `docs/canary.md`.
 
-- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`; `curl`. Variables
+- Requires: `muructl==0.1.0a16`; `curl`. Variables
   `app_port` (8080) and `muru_run_dir` (`/tmp/muru-canary`).
 
 - Source: `docs/howto/rollouts.md`, `docs/howto/traffic.md`.
@@ -656,7 +655,7 @@ the daemon down.
   application, static files with a `.gz` variant, a report, two error
   pages), `site.toml` and `docs/nginx-and-the-edge.md`.
 
-- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`; `curl`, `sed`.
+- Requires: `muructl==0.1.0a16`; `curl`, `sed`.
   Variables `app_port` (8080) and `muru_run_dir` (`/tmp/muru-edge`).
 
 - Source: `docs/howto/static-files.md`, `compression.md`,
@@ -671,7 +670,7 @@ Can an existing gunicorn deployment move to Muru one step at a time?
 Page 2 opens `docs/cutting-over.md` (a managed server release, a
 native release canaried against it, and when to choose which server)
 and `orders/orders.py`, whose responses name `SERVER_SOFTWARE`
-(`gunicorn/26.2.0`, then `muru/0.1.0a12`), starts the daemon and
+(`gunicorn/26.2.0`, then `muru/0.1.0a16`), starts the daemon and
 deploys `muructl deploy orders orders
 --server gunicorn -- gunicorn --workers 2 --bind '{bind}'
 orders:application`, shows gunicorn answering through the edge, the
@@ -688,7 +687,7 @@ another server.
   `routes.toml`, `traffic.py`, `show_processes.py` and
   `docs/cutting-over.md`.
 
-- Requires: `muru==0.1.0a15`, `muructl==0.1.0a15`, `gunicorn==26.2.0`;
+- Requires: `muructl==0.1.0a16`, `gunicorn==26.2.0`;
   `curl`, `ps`. Variables `app_port` (8080) and `muru_run_dir`
   (`/tmp/muru-server`).
 
@@ -741,6 +740,33 @@ page helps. The framework workshops (2 to 4) can be taken in any order
 after the first; a learner who uses only one framework takes that one.
 Each edits the project through actions (`file-write` appends,
 `editor-insert`, `editor-replace`), so the learner still types nothing.
+
+### What was checked against 0.1.0a16
+
+Checked on CPython 3.14 in a scratch environment holding `muructl`
+alone, and self-tested on CPython 3.14, macOS, on 2026-11-03, when the
+pins moved from 0.1.0a15 to 0.1.0a16 and `muru` left every
+environment (the a15 record below stands for what it does not
+restate):
+
+- With no `muru` in the environment, a development run's first lines
+  are `muru: fetched the runtime library
+  muru-0.1.0a16-cp314-cp314-<platform>.whl, once` and `muru: runtime
+  library 0.1.0a16 from <cache>/runtime/0.1.0a16/cp314`; once the
+  cache has it, the second line alone. `<cache>` is `~/.cache/muru`
+  on Linux and `~/Library/Caches/muru` on macOS, or `MURU_CACHE_DIR`.
+  Workshop I.2 names the line.
+
+- `muructl check app:application --python python` in a directory with
+  a one-line WSGI application fills the same cache, which is how the
+  Binder and Codespaces setup does it. With the cache filled,
+  `MURU_OFFLINE=1 muructl run` serves.
+
+- The orders service's `SERVER_SOFTWARE` under Muru is
+  `muru/0.1.0a16`. Nothing else in the release changes what a
+  workshop shows: per-group recycling, the configuration reference,
+  the uWSGI profile and the stricter refusal of zero and empty values
+  touch nothing a workshop writes.
 
 ### What was checked against 0.1.0a15
 
@@ -1304,14 +1330,19 @@ Codespaces image provide; 3.15 is acceptable where a workshop needs it
 and the hosts have it.
 
 **Muru is installed per workshop, pinned.** Each workshop declares an
-`environment` whose `requirements.txt` pins `muru` and `muructl` to the
-release in `reference/muru`, written the PyPI way (`0.1.0a11`). An exact
-pin needs no `--pre`. The extension puts the environment first on
-`PATH` in the terminals, so `muructl` finds the environment's Python
-with no activation step. No workshop step uses uv or `uv tool install`:
-uv is not on Binder, and nothing is installed under the home directory.
-The README tells learners to `uv tool install muructl` afterwards, as
-Muru's own documentation does.
+`environment` whose `requirements.txt` pins `muructl` to the release in
+`reference/muru`, written the PyPI way (`0.1.0a16`). An exact pin needs
+no `--pre`. The runtime library, `muru`, is not installed: muructl puts
+the copy matching its own version on the application's path, unpacked
+once into its user cache, or into the workspace where a workshop sets
+`MURU_CACHE_DIR` or runs the daemon. The Binder and Codespaces setup
+fills the user cache for the image's Python, so a session's first run
+fetches nothing. The extension puts the environment first on `PATH` in
+the terminals, so `muructl` finds the environment's Python with no
+activation step. No workshop step uses uv or `uv tool install`: uv is
+not on Binder, and nothing but muructl's cache is written under the home
+directory. The README tells learners to `uv tool install muructl`
+afterwards, as Muru's own documentation does.
 
 **Released features only.** A workshop uses only what is in the release
 it pins. The pin, the submodule and every workshop's requirements move
@@ -1503,6 +1534,13 @@ start-up line descriptions gained the `watching` line, workshop II.1
 gained a page on `[tool.muru.run]` and `muru.local.toml`, workshop II.6
 gained a page moving every flag into the run table, and every workshop
 self-tested again.
+
+On 2026-11-03 the pins moved to 0.1.0a16, and `muru` left every
+workshop's requirements, since muructl supplies the runtime library
+itself (muru#127, muru-workshops#13): the welcome pages and READMEs
+name `muructl` alone, workshop I.2 explains where the library comes
+from, the Binder and Codespaces setup fills muructl's cache, and every
+workshop self-tested again.
 
 ### Meet Muru
 

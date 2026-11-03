@@ -65,8 +65,8 @@ finish: |
   project**.
 
   To use Muru for your own applications, install the command with
-  `uv tool install muructl` and add the runtime library to each
-  application's environment with `uv add muru`. Muru's
+  `uv tool install muructl` and serve them with `muructl run`; muructl
+  supplies the runtime library itself. Muru's
   [managed servers guide](https://muru.readthedocs.io/en/latest/howto/managed-servers.html)
   covers every profile and setting, and the
   [documentation](https://muru.readthedocs.io/) the rest.

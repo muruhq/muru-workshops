@@ -8,6 +8,6 @@ release's host and workers. Compares with gunicorn's `HUP` and `USR2`,
 a mod_wsgi daemon restart, and two deployments behind a load balancer.
 
 About 30 minutes, in two terminals with a document and the code in an
-area above them. It installs `muru` and `muructl` 0.1.0a15 into an
-environment of its own, serves on port 8080 unless you change it, and
-keeps the daemon's sockets in `/tmp/muru-deploy`.
+area above them. It installs `muructl` 0.1.0a16 into an environment of
+its own, serves on port 8080 unless you change it, and keeps the
+daemon's sockets in `/tmp/muru-deploy`.

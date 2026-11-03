@@ -34,7 +34,7 @@ all.
 Where Muru fits among Python web servers, what it does while you
 develop, and how its daemon deploys releases without downtime, compared
 throughout with Apache and mod_wsgi, gunicorn, uvicorn and Granian.
-Each workshop installs Muru 0.1.0a15 into an environment of its own and
+Each workshop installs Muru 0.1.0a16 into an environment of its own and
 runs it in two terminals, with documents and the application shown
 above them. Workshops 7 to 10 run the daemon, which keeps its state
 in the workspace and its sockets in a short directory under `/tmp`.
@@ -111,7 +111,7 @@ A Flask, Django or FastAPI project taken through development under
 `muructl run` in depth: where its settings live, what each framework
 needs, the hooks around the fork, reload and HTTPS fitted to a real
 project, and what happens when a request hangs. Each workshop installs
-Muru 0.1.0a15, and the framework it teaches, into an environment of
+Muru 0.1.0a16, and the framework it teaches, into an environment of
 its own, and names the Meet Muru workshop it builds on. Workshops 2 to
 4 can be taken in any order, or only the one for your framework.
 
@@ -181,8 +181,9 @@ serve on port 8080 unless you change the port in a workshop's Variables
 dialog.
 
 To use Muru for your own applications afterwards, install the command
-once with `uv tool install muructl`, and add the runtime library to
-each application's environment with `uv add muru`.
+once with `uv tool install muructl`, then serve an application with
+`muructl run`. muructl supplies the runtime library itself, so nothing
+is added to the application's environment.
 
 ## Subscribe from your own JupyterLab
 
@@ -228,6 +229,6 @@ order the Justfile gives.
 `just bump <version>` moves to a new release of the extension,
 refreshes the files the scaffold wrote and moves its reference
 checkout. `just bump-muru <tag>` moves `reference/muru` to a Muru
-release tag, such as `v0.1.0-alpha.15`; then update `muru` and `muructl`
-in every `workshops/*/requirements.txt` to the same release and run
+release tag, such as `v0.1.0-alpha.16`; then update `muructl` in
+every `workshops/*/requirements.txt` to the same release and run
 `just test-all`.

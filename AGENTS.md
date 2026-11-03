@@ -78,10 +78,11 @@ which follows Muru's development branch rather than the release.
 
 Muru is not installed in this project's environment. To try something
 against the release the workshops teach, make a scratch environment
-outside the repository and install the pinned versions into it, for
+outside the repository and install the pinned version into it, for
 example `uv venv /tmp/m && uv pip install --python /tmp/m/bin/python
-muru==0.1.0a15 muructl==0.1.0a15`, then run `muructl` from it with
-`VIRTUAL_ENV` set. Use loopback ports that nothing else uses, and stop
+muructl==0.1.0a16`, then run `muructl` from it with `VIRTUAL_ENV` set.
+muructl supplies the `muru` runtime library itself, fetching it once
+into its cache. Use loopback ports that nothing else uses, and stop
 every server you start by its own process id, never with a pattern
 that could match the user's own processes. Check behaviour against the
 real release and the Python the learner gets, which is 3.14 on Binder
@@ -110,12 +111,17 @@ declare no `frontends` list, which says JupyterLab alone. They start
 servers and run terminals, which JupyterLite cannot.
 
 - Each workshop declares an `environment` with a `requirements.txt`
-  pinning `muru` and `muructl` to the release in `reference/muru`,
-  written the PyPI way (`0.1.0a15`), plus anything else it needs, such
-  as a framework. Nothing taught goes in `pyproject.toml`. The welcome
-  page carries `environment-create` as its first step, and the
-  environment is then first on `PATH` in the terminals, so `muructl`
-  finds the environment's Python with no activation step.
+  pinning `muructl` to the release in `reference/muru`, written the
+  PyPI way (`0.1.0a16`), plus anything else it needs, such as a
+  framework. `muru`, the runtime library, is not in it: muructl puts
+  the copy matching its own version on the application's path,
+  unpacked once into its user cache (`~/.cache/muru` on Linux), or
+  into the workspace where a workshop sets `MURU_CACHE_DIR` or runs
+  the daemon. The Binder and Codespaces setup fills the user cache
+  ahead of the first run. Nothing taught goes in `pyproject.toml`.
+  The welcome page carries `environment-create` as its first step, and
+  the environment is then first on `PATH` in the terminals, so
+  `muructl` finds the environment's Python with no activation step.
 
 - No workshop step uses uv, `uv tool install` or `pip install`: uv is
   not on Binder, and the environment already has what the workshop
@@ -286,7 +292,8 @@ safe to test. For these workshops, staying inside also allows serving
 on a loopback port named by a workshop variable, and the temporary
 socket directory `muructl run` makes under the system's temporary
 directory and removes when it exits, and a daemon workshop's run
-directory, `/tmp/muru-<word>` as its `muru_run_dir` variable names.
+directory, `/tmp/muru-<word>` as its `muru_run_dir` variable names,
+and the runtime library muructl unpacks into its user cache.
 Check that the workshop's ports are free and that its run directory
 is not in use first, and that nothing of the workshop's is left
 running after the test. The user's own JupyterLab, from `just lab`,

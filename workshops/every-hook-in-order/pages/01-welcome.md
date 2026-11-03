@@ -16,8 +16,8 @@ gunicorn's server hooks.
 The hooks module, `hooks.py`, a WSGI application and an ASGI one are
 already in your workspace. Nothing you do here needs you to type code.
 
-This workshop has an environment of its own with `muru` and `muructl`
-installed, at release 0.1.0a15. Create it first; it takes a minute.
+This workshop has an environment of its own with `muructl` installed, at
+release 0.1.0a16. Create it first; it takes a minute.
 
 ```{environment-create}
 :title: Create the workshop environment
