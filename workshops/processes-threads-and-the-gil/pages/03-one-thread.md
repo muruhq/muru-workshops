@@ -12,7 +12,7 @@ which serves one request at a time, as gunicorn's `sync` worker does.
 :id: start-one-thread
 :session: server
 :wait: 3s
-muructl run work:application --port {{ app_port }} --processes 1 --threads 1 --access-log requests.jsonl
+muructl run work:application --port {{ app_port }} --processes 1 --threads 1 --access-log-file requests.jsonl
 ```
 
 The access log goes to the file now, so the terminal shows only the

@@ -65,7 +65,9 @@ flowchart LR
   with the time the request waited for a worker thread (`queue`), the
   time your code took (`app`), the worker that served it and a request
   id. `--access-log errors` keeps only failures and slow requests, and
-  `--access-log` with a file name writes JSON lines instead.
+  `--access-log-file` with a file name writes JSON lines there instead
+  of to the terminal; the two together keep only the failures and slow
+  requests, in a file.
 
 - **Your output.** The host relays each worker's standard output and
   standard error to the terminal, tagged with the worker's index:

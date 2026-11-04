@@ -14,6 +14,6 @@ and shows `--print-config` leaving the table out. Compares with
 gunicorn's and uvicorn's options.
 
 About 30 minutes, in two terminals with a document and the project's
-files in an area above them. It installs `muructl` 0.1.0a16 and
+files in an area above them. It installs `muructl` 0.1.0a17 and
 `trustme` into an environment of its own, keeps its certificates in the
 workspace, and serves on ports 8080 and 8443 unless you change them.

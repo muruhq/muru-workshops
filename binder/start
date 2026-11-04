@@ -1,0 +1,10 @@
+#!/bin/bash
+# Run by repo2docker at the start of every Binder session, before
+# JupyterLab. MURU_WHEEL_DIR names the wheelhouse postBuild filled,
+# which holds the runtime library's wheel, to every workshop: muructl
+# and the daemon take the library from it, rather than PyPI, wherever a
+# workshop keeps muructl's cache or the daemon's state in its own
+# workspace.
+export MURU_WHEEL_DIR="${HOME}/.wheels"
+
+exec "$@"

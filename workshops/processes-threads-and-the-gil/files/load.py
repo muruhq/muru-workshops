@@ -96,7 +96,7 @@ def main() -> int:
         return 2
 
     if not os.path.exists(LOG):
-        print(f"No {LOG} here. Start muructl run with --access-log {LOG}.")
+        print(f"No {LOG} here. Start muructl run with --access-log-file {LOG}.")
         return 1
 
     print(f"{REQUESTS} requests to each path, {AT_A_TIME} at a time, on {cpus()} CPUs")

@@ -9,5 +9,5 @@ request in the worker waits, until the loop stall timeout replaces the
 worker. Compares with uvicorn and gunicorn.
 
 About 30 minutes, in two terminals with a document and the code in an
-area above them. It installs `muructl` 0.1.0a16 and FastAPI into an
+area above them. It installs `muructl` 0.1.0a17 and FastAPI into an
 environment of its own, and serves on port 8080 unless you change it.

@@ -50,18 +50,25 @@ CONF
 
 # muructl supplies the runtime library, muru, itself: the first run on
 # an interpreter unpacks the copy matching muructl's version into its
-# user cache, fetching the wheel from PyPI. Fill the cache now for this
-# Python, which the workshops' environments are made from, so the first
-# run in a session fetches nothing. muructl, installed from the
-# wheelhouse into a throwaway directory, checks a one-line application,
-# which provides the library as a run would.
+# cache, fetching the wheel from PyPI. Put that wheel, for this Python,
+# which the workshops' environments are made from, in the wheelhouse
+# too. MURU_WHEEL_DIR names the wheelhouse to every session, so a
+# workshop that keeps muructl's cache or the daemon's state in its own
+# workspace takes the library from disk rather than PyPI. Then fill
+# muructl's user cache from it, so the first run of every other
+# workshop finds the library unpacked already: muructl, installed from
+# the wheelhouse into a throwaway directory, checks a one-line
+# application, which provides the library as a run would.
 prefill="$(mktemp -d)"
 
 grep -h '^muructl==' workshops/*/requirements.txt | sort -u > "$prefill/requirements.txt"
+sed 's/^muructl==/muru==/' "$prefill/requirements.txt" > "$prefill/runtime.txt"
+python -m pip download --disable-pip-version-check --no-deps --only-binary :all: \
+    -d "$wheels" -r "$prefill/runtime.txt"
 python -m pip install --disable-pip-version-check --no-index --find-links "$wheels" \
     --target "$prefill/muructl" -r "$prefill/requirements.txt"
 printf 'def application(environ, start_response):\n    start_response("200 OK", [])\n    return [b""]\n' > "$prefill/app.py"
-(cd "$prefill" && "$prefill/muructl/bin/muructl" check app:application --python "$(command -v python)")
+(cd "$prefill" && MURU_WHEEL_DIR="$wheels" "$prefill/muructl/bin/muructl" check app:application --python "$(command -v python)")
 rm -rf "$prefill"
 
 settings="${NB_PYTHON_PREFIX}/share/jupyter/lab/settings"

@@ -34,6 +34,6 @@ of a second of CPU time, as a view does that renders or calculates.
 `load.py` sends 40 requests to each path it is given, eight at a time,
 and then reads the edge's records of those requests from a JSON access
 log, `requests.jsonl`, which `muructl run` writes when started with
-`--access-log requests.jsonl`. It prints the requests served per
+`--access-log-file requests.jsonl`. It prints the requests served per
 second and the median total, `queue` and `app` times. Its first line
 says how many CPUs it can use, which matters on the last page.

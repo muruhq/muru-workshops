@@ -11,6 +11,6 @@ Compares with what `flask run`, gunicorn and mod_wsgi do with a
 factory.
 
 About 25 minutes, in two terminals with a document, the project's files
-and the shop in a pane above them. It installs `muructl` 0.1.0a16 and
+and the shop in a pane above them. It installs `muructl` 0.1.0a17 and
 Flask into an environment of its own, and serves on port 8080 unless you
 change it.

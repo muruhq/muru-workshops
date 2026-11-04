@@ -10,6 +10,6 @@ the same application over HTTPS with a development certificate and
 shows HTTP/2 negotiated over TLS with curl.
 
 About 20 minutes, in two terminals with a document and the application
-in an area above them. It installs `muructl` 0.1.0a16 into an
+in an area above them. It installs `muructl` 0.1.0a17 into an
 environment of its own, and serves on ports 8080 and 8443 unless you
 change them.

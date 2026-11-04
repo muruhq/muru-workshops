@@ -17,7 +17,7 @@ The three versions of the application are in `releases/v1`,
 needs you to type code.
 
 This workshop has an environment of its own with `muructl` installed, at
-release 0.1.0a16. Create it first; it takes a minute.
+release 0.1.0a17. Create it first; it takes a minute.
 
 ```{environment-create}
 :title: Create the workshop environment

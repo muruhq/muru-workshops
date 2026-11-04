@@ -29,7 +29,7 @@ Stop the application, then start it with eight threads.
 :id: start-eight-threads
 :session: server
 :wait: 3s
-muructl run work:application --port {{ app_port }} --processes 1 --threads 8 --access-log requests.jsonl
+muructl run work:application --port {{ app_port }} --processes 1 --threads 8 --access-log-file requests.jsonl
 ```
 
 ```{verify}

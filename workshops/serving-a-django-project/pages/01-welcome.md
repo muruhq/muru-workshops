@@ -17,7 +17,7 @@ The project, `mysite` with a `catalog` app of products, is in the
 type code.
 
 This workshop has an environment of its own with `muructl` and Django
-installed, at Muru release 0.1.0a16. Create it first; it takes a minute.
+installed, at Muru release 0.1.0a17. Create it first; it takes a minute.
 
 ```{environment-create}
 :title: Create the workshop environment

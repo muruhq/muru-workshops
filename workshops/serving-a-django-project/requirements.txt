@@ -1,2 +1,2 @@
-muructl==0.1.0a16
+muructl==0.1.0a17
 django==6.1.2

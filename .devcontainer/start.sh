@@ -31,8 +31,11 @@ fi
 # variables are dropped and git is given an empty credential helper, so
 # nothing a workshop runs is handed a token for the learner's account.
 # This narrows what workshop code can reach; it is not a sandbox.
+# MURU_WHEEL_DIR names the wheelhouse setup.sh filled, which holds the
+# runtime library's wheel, to every workshop.
 setsid nohup env -u GITHUB_TOKEN -u GITHUB_CODESPACE_TOKEN \
   GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=credential.helper GIT_CONFIG_VALUE_0= \
+  MURU_WHEEL_DIR="${HOME}/.wheels" \
   python -m jupyterlab \
   --no-browser \
   --ServerApp.ip=0.0.0.0 \
