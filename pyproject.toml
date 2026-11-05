@@ -19,6 +19,10 @@ dependencies = [
     "jupyter-server-proxy>=4.4",
     "jupyterlab>=4.6,<5",
     "jupyterlab-workshop==0.30.0",
+    # muructl resolves a project's requires-python with uv, and the
+    # deploying workshops' releases carry one; neither the Binder image
+    # nor the codespace image has uv of its own.
+    "uv>=0.13",
 ]
 
 [dependency-groups]
