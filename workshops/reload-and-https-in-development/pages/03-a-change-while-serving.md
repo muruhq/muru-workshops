@@ -42,7 +42,7 @@ release, not a restarted worker. The last line counts the requests.
 :label: No request failed during the reload
 :substrate: shell
 :trigger: after:change-greeting
-for i in 1 2 3 4 5 6 7 8 9 10; do [ -f watch.log ] && break; sleep 1; done; out=$(cat watch.log 2>/dev/null); printf '%s\n' "$out" | grep ', 0 failed$' || { echo "watch.py has not finished yet, or requests failed: ${out:-no summary yet}"; exit 1; }
+for i in 1 2 3 4 5 6 7 8 9 10; do [ -f watch.log ] && break; sleep 1; done; out=$(cat watch.log 2>/dev/null); printf '%s\n' "$out" | head -n 1 | grep ', 0 failed$' || { echo "watch.py has not finished yet, or requests failed: ${out:-no summary yet}" | head -n 4; exit 1; }
 ```
 
 ```{hint}

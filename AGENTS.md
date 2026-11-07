@@ -89,7 +89,7 @@ Muru is not installed in this project's environment. To try something
 against the release the workshops teach, make a scratch environment
 outside the repository and install the pinned version into it, for
 example `uv venv /tmp/m && uv pip install --python /tmp/m/bin/python
-muructl==0.1.0a17`, then run `muructl` from it with `VIRTUAL_ENV` set.
+muructl==0.1.0a20`, then run `muructl` from it with `VIRTUAL_ENV` set.
 muructl supplies the `muru` runtime library itself, fetching it once
 into its cache. Use loopback ports that nothing else uses, and stop
 every server you start by its own process id, never with a pattern
@@ -100,7 +100,13 @@ behaviour.
 
 A workshop uses only what is in a released version of Muru. Work on
 Muru's `develop` branch can inform the design of later collections in
-OUTLINE.md, but no workshop is written against it.
+OUTLINE.md, but no workshop is written against it. The one exception
+is updating the workshops for the next release once its version is in
+Muru's `Cargo.toml`: `just wheels` builds that checkout, `just
+lab-dev` and `just test-dev <name>` run the workshops against it, and
+the change reaches `main` only once the release is on PyPI. Check
+behaviour against those wheels, not against `reference/muru`'s
+release.
 
 What a workshop says about Apache and mod_wsgi, gunicorn, uvicorn and
 Granian comes from their own documentation, linked in OUTLINE.md, and
@@ -121,7 +127,7 @@ servers and run terminals, which JupyterLite cannot.
 
 - Each workshop declares an `environment` with a `requirements.txt`
   pinning `muructl` to the release in `reference/muru`, written the
-  PyPI way (`0.1.0a17`), plus anything else it needs, such as a
+  PyPI way (`0.1.0a20`), plus anything else it needs, such as a
   framework. `muru`, the runtime library, is not in it: muructl puts
   the copy matching its own version on the application's path,
   unpacked once into its user cache (`~/.cache/muru` on Linux), or
@@ -149,7 +155,7 @@ servers and run terminals, which JupyterLite cannot.
 - Everything a workshop writes stays inside its workspace, `work/`.
   Shipped files go under `files/`. A workshop that runs the daemon
   points `MURU_STATE_DIR`, `MURU_LOG_DIR`, `MURU_CACHE_DIR` and
-  `MURU_CONFIG` into the workspace through its manifest `env`, as
+  `MURU_DAEMON_CONFIG` into the workspace through its manifest `env`, as
   paths relative to it (`muru/state` and so on). Its sockets cannot
   go there: the run directory must be absolute and short, so it comes
   from a variable `muru_run_dir`, exported as `MURU_RUN_DIR`,
@@ -196,6 +202,14 @@ and prefer them over the underlying commands:
   moves `reference/jupyterlab-workshop`; `just bump-muru <tag>` moves
   `reference/muru` to a release tag, after which every workshop's
   `requirements.txt` is updated to match and `just test-all` run.
+
+- `just wheels [SRC]` builds `muru` and `muructl` wheels from a Muru
+  checkout (`../muru` by default) into `.muru-dev/wheels` and removes
+  the workshops' environments and workspaces; `just lab-dev` and
+  `just test-dev <name>` then run the workshops with Muru from those
+  wheels, in a runtime cache of their own. `just lab`, `just test` and
+  `just test-all` refuse to start after `just lab-dev` until `just
+  clean` has removed the environments it made.
 
 The order of a collection lives in the Justfile, as the list of
 workshop names the `index-<collection>` recipe passes to

@@ -16,7 +16,7 @@ The project, a small shop in the `shop` directory of your workspace,
 is already there. Nothing you do here needs you to type code.
 
 This workshop has an environment of its own with `muructl` and Flask
-installed, at Muru release 0.1.0a17. Create it first; it takes a minute.
+installed, at Muru release 0.1.0a20. Create it first; it takes a minute.
 
 ```{environment-create}
 :title: Create the workshop environment

@@ -1,8 +1,8 @@
 # What a reload replaces
 
 Every development server can watch your files and serve the new code
-when you save: gunicorn and uvicorn when asked with `--reload`, a
-`muructl run` development run unless told not to. What differs is what
+when you save: gunicorn, uvicorn and Granian when asked with
+`--reload`, a `muructl run` development run unless told not to. What differs is what
 it replaces to do that, what happens to requests while it does, and
 what you are left with when the new code does not even import.
 
@@ -37,6 +37,23 @@ change, terminates the server process and starts a new one. If the new
 code fails to import, the new process exits, and nothing serves
 requests until the next change.
 
+## Granian
+
+```mermaid
+flowchart LR
+    M[granian main process] -->|file changed:<br/>stop| W1[workers<br/>old code]
+    M -. start .-> W2[new workers<br/>import new code]
+```
+
+With `--reload`, which needs the `granian[reload]` extra, the main
+process watches the working directory and, on a change, stops every
+worker, waiting for each to finish, then starts new ones, which import
+the code afresh. No worker serves between the two.
+
+If the new code fails to import, the new workers exit and Granian
+shuts down. With `--reload-ignore-worker-failure` it stays up instead,
+serving nothing until the next change.
+
 ## muructl run
 
 ```mermaid
@@ -70,6 +87,7 @@ and the next release replaces it.
 | --- | --- | --- | --- |
 | gunicorn | each worker, in place | wait for a worker | every request is a 500 with the traceback |
 | uvicorn | the server process | wait for the new process | nothing serves until the next change |
+| Granian | every worker, stopped and then started | none is served until the new workers start | Granian stops, or with `--reload-ignore-worker-failure` serves nothing until the next change |
 | muructl run | the release, beside the old one | served by the old release | the old release keeps serving |
 
 The daemon deploys new code the same way, as a release that starts

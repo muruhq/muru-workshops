@@ -16,22 +16,24 @@ which shows what Muru does instead when it runs as a daemon.
 :area: viewer
 ```
 
-The settings of a development run carry over to the daemon. Ask
-`muructl run` to write them out as the configuration the daemon reads,
-rather than serving.
+The settings of a development run carry over to the daemon. `muructl
+render` takes the same settings as the run and writes the release they
+describe in the configuration the daemon reads, without needing a
+daemon.
 
 ```{execute}
-:id: print-config
+:id: render-release
 :session: client
 :wait: prompt
-muructl run hello:application --processes 3 --threads 2 --print-config
+muructl render hello . --entrypoint hello:application --processes 3 --threads 2
 ```
 
-Scroll to the end of the output. The `[app.hello.release.r1]` table is
-the application as a release: its source directory, its entrypoint,
-the Python it runs on, and the three processes of two threads you
-asked for. `muructl apply` takes a file like this one, and the
-workshops on the daemon start from there.
+Below the comments, the `[app.hello.release.r1]` table is the
+application as a release: its source directory, its entrypoint, and
+the three processes of two threads you asked for. A setting left at
+its default is not written, and the daemon finds the Python to run it
+on when the file is applied. `muructl apply` takes a file like this
+one, and the workshops on the daemon start from there.
 
 You have finished with the server. Stop it in the terminal on the
 left.

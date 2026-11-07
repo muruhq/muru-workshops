@@ -25,6 +25,14 @@ flowchart LR
   `--reload-dir` changes the directories, and `--reload-include` and
   `--reload-exclude` the patterns, which need the `watchfiles` package.
 
+- Granian's `--reload` watches the working directory, or the paths
+  `--reload-paths` names, for a change to any file, not only Python,
+  that `watchfiles` does not ignore by default: version control and
+  virtualenv directories, `__pycache__` and compiled `.pyc` files
+  among them. `--reload-ignore-dirs`, `--reload-ignore-patterns`
+  (regular expressions) and `--reload-ignore-paths` add to what it
+  ignores.
+
 - A `muructl run` development run watches `**/*.py` under the
   project's directory without being asked; `--no-reload` turns that
   off for a run. `--reload-dir` names other directories to watch,
@@ -112,9 +120,9 @@ table.
 
 The daemon ignores the run table: `muructl deploy` takes `[tool.muru]`
 and nothing of how a laptop served the project. `muructl run
---print-config` shows the split, writing the listeners the table
-resolved to, which belong in the daemon's own file, and the release
-from `[tool.muru]`.
+--print-config` prints the settings a run would use and where each came
+from, the run table's among them, and `muructl render` writes the
+release a deploy would make, from `[tool.muru]` alone.
 
 gunicorn's `gunicorn.conf.py` holds every setting, how the server runs
 included, and uvicorn and Granian have no file of their own: a project

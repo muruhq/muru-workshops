@@ -13,7 +13,7 @@
     {
       "name": "settings-in-the-project",
       "title": "Keep the run settings with the project",
-      "description": "Move a long muructl run command line into the project's [tool.muru] table, put how a checkout is served into [tool.muru.run] and one machine's own port into muru.local.toml, see what a flag or a misspelt key does, and what --print-config makes of it all for the daemon, compared with where gunicorn, uvicorn, Granian and mod_wsgi keep their settings.",
+      "description": "Move a long muructl run command line into the project's [tool.muru] table, put how a checkout is served into [tool.muru.run] and one machine's own port into muru.local.toml, see what a flag or a misspelt key does, where --print-config says each setting came from, and what muructl render writes for the daemon, compared with where gunicorn, uvicorn, Granian and mod_wsgi keep their settings.",
       "tags": [
         "muru",
         "configuration",
@@ -209,7 +209,7 @@
     {
       "name": "reload-and-https-your-way",
       "title": "Reload and HTTPS beyond the defaults",
-      "description": "Make a development run's reload watch a project's templates and data files and ignore the file it writes, watch a request in flight finish on the old release during a reload, put another name on the development certificate, redirect HTTP to HTTPS, serve a certificate from a CA of your own, then move every flag into the project's run table, compared with gunicorn's and uvicorn's options.",
+      "description": "Make a development run's reload watch a project's templates and data files and ignore the file it writes, watch a request in flight finish on the old release during a reload, put another name on the development certificate, redirect HTTP to HTTPS, serve a certificate from a CA of your own, then move every flag into the project's run table, compared with gunicorn's and uvicorn's options and Granian's for reloading.",
       "tags": [
         "muru",
         "reload",

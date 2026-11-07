@@ -52,7 +52,8 @@ flowchart LR
     L["muru.local.toml<br/>how this machine serves it"] --> R
     F["command line<br/>this one run"] --> R
     T --> D[muructl deploy<br/>a release for the daemon]
-    R -->|--print-config| C[the declarative<br/>configuration]
+    R -->|--print-config| P[each setting and<br/>where it came from]
+    T --> W[muructl render<br/>the release as a file]
 ```
 
 `[tool.muru]` holds what the application is, wherever it runs: its
@@ -83,7 +84,7 @@ serve beyond loopback, have no key and are typed each time.
 The application's table is not only for development. The daemon reads
 `[tool.muru]` when a project directory is deployed to it, so the
 settings that describe the application on your laptop go with it into
-its releases. `muructl run --print-config` writes what a run amounts to
-as the daemon's declarative configuration, the listeners the run
-resolved and the release from `[tool.muru]`, a step towards running
-the project as a service.
+its releases. `muructl run --print-config` prints the settings a run
+would use and where each came from, and `muructl render` writes the
+release a deploy would make as a file in the daemon's format, from
+`[tool.muru]` alone, a step towards running the project as a service.

@@ -17,7 +17,7 @@ it loads and two helpers that send requests. Nothing you do here needs
 you to type code.
 
 This workshop has an environment of its own with `muructl` and FastAPI
-installed, at Muru release 0.1.0a17. Create it first; it takes a minute.
+installed, at Muru release 0.1.0a20. Create it first; it takes a minute.
 
 ```{environment-create}
 :title: Create the workshop environment

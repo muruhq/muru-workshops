@@ -96,9 +96,9 @@ options:
 explanation: "`muru.local.toml` holds a `[run]` table with the same keys for one machine alone, never committed, and wins over the project's table as a flag wins over both. The first workshop of this collection shows it."
 ```
 
-The daemon never reads the run table: `muructl deploy` of the project
-takes `[tool.muru]` and ignores it. `--print-config` shows the same
-split. Stop the project and look at the listeners it writes.
+`--print-config` prints the settings a run would use, each with where
+it came from, without serving anything. Stop the project and look at
+the `[run]` table it prints.
 
 ```{interrupt}
 :id: stop-from-table
@@ -109,13 +109,27 @@ split. Stop the project and look at the listeners it writes.
 :id: print-config
 :session: client
 :wait: prompt
-muructl run menu --print-config | sed -n '/^\[\[listener\]\]/,/^$/p'
+muructl run menu --print-config | sed -n '/^\[run\]/,/^$/p'
 ```
 
-Two listeners, the HTTPS one marked `tls = true`, resolved from the
-table's ports: what the daemon's own configuration file would carry.
-Nothing of the run table itself appears, and the release that follows
-in the full output is made from `[tool.muru]` alone.
+Every key the table sets is marked `[tool.muru.run] in
+menu/pyproject.toml`, and the rest are defaults. `https` stays `false`:
+it is the mode that serves HTTPS beside HTTP, and `https_only` the one
+the table chose.
+
+The daemon never reads the run table: `muructl deploy` of the project
+takes `[tool.muru]` and ignores it. `muructl render` writes the release
+a deploy would make, in the daemon's format, without needing a daemon.
+
+```{execute}
+:id: render-release
+:session: client
+:wait: prompt
+muructl render menu menu
+```
+
+Below the comments, the release has its source and its entrypoint and
+nothing else: no port, no certificate and no reload patterns.
 
 ```{verify}
 :id: project-stopped-table

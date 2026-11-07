@@ -45,7 +45,7 @@ None of this needs a second deployment or a load balancer outside the
 server, and a release can even run a different version of Python from
 the one before it.
 
-`muructl run --print-config` writes the settings of a development run
-as the configuration the daemon reads, which is the path from one to
-the other. The workshops after this one cover the daemon, releases and
+`muructl render` takes the settings a development run takes and writes
+the release they describe as the configuration the daemon reads, which
+is the path from one to the other. The workshops after this one cover the daemon, releases and
 traffic in turn.

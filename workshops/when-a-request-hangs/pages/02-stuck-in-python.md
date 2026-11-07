@@ -58,9 +58,9 @@ gear button in the header of this panel, then start the service again.
 
 `504` after two seconds. In the terminal on the left:
 
-- `request ... GET /report ran past the soft timeout of 2 s at
-  accounts.py line ... in application, ... interrupting it`: where the
-  request was, without a debugger;
+- `request.soft_timeout: worker 0 (pid ...): request ... GET /report
+  ran past the soft timeout of 2 s at accounts.py line ... in
+  application, ...`: where the request was, without a debugger;
 
 - the traceback of `muru.RequestTimeout`, raised in the request's
   thread at the `time.sleep` it was in;

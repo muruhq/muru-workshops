@@ -5,8 +5,9 @@ requires: [verify:server-up]
 
 # Reload on save
 
-gunicorn and uvicorn reload when you save if you ask with `--reload`;
-a `muructl run` development run does it without being asked. Each
+gunicorn, uvicorn and Granian reload when you save if you ask with
+`--reload`; a `muructl run` development run does it without being
+asked. Each
 replaces something different when a file changes. Open the document
 that compares them, and read it through to the table at the end.
 

@@ -38,10 +38,11 @@ explanation: "A WSGI request waiting at breakpoint() is exempt from the soft and
 curl -s "http://127.0.0.1:{{ app_port }}/checkout?item=cup" -o order2.txt & sleep 10; muructl debug status checkout
 ```
 
-Ten seconds in, the request is still in flight on its worker and the
-terminal on the left has no timeout line. The breakpoint waits, and
-the timeouts wait with it. Attach with nothing to type, so the end of
-input lets the request go on at once.
+Ten seconds in, the request still holds a thread of its worker, with
+THREAD-OLDEST past ten seconds, and the terminal on the left has no
+timeout line. The breakpoint waits, and the timeouts wait with it.
+Attach with nothing to type, so the end of input lets the request go
+on at once.
 
 ```{execute}
 :id: attach-nothing

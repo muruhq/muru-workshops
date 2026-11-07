@@ -69,9 +69,10 @@ Both got `502`. In the terminal on the left:
 - no soft timeout line at all: the thread never ran Python to raise
   it in;
 
-- ten seconds in, `no thread has run Python for 10.2 s, past the GIL
-  stall timeout of 10 s`, the event `worker.gil_stalled`, two access
-  log lines, `502` with `reason=worker_stalled`, a new worker, and
+- ten seconds in, the event `worker.gil_stalled: worker 0 (pid ...):
+  no thread has run Python for 10.0 s, past the GIL stall timeout of
+  10 s`, the line saying the worker is being replaced, two access log
+  lines, `502` with `reason=worker_stalled`, a new worker, and
   `gave up 2 requests for the edge to answer`;
 
 - each thread's stack, written by `faulthandler`, which needs no GIL,

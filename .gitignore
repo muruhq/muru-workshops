@@ -25,6 +25,10 @@ workshops/*/scratch/
 results-*.xml
 test-results/
 
+# Muru wheels built from a checkout by `just wheels`, and the runtime
+# cache of `just lab-dev` and `just test-dev`
+.muru-dev/
+
 # Temporary working files for agents, never referenced from committed files
 scratch/
 

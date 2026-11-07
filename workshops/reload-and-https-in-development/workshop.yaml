@@ -2,7 +2,7 @@ apiVersion: jupyterlab-workshop/v1alpha1
 name: reload-and-https-in-development
 title: Reload, HTTPS and HTTP/2 on your laptop
 version: 0.1.0
-description: See what a muructl run development run replaces when you save, with no flag asked for, compared with gunicorn's and uvicorn's --reload, keep serving through a change and through a syntax error, then serve the same application over HTTPS with a development certificate and watch HTTP/2 negotiated over TLS.
+description: See what a muructl run development run replaces when you save, with no flag asked for, compared with gunicorn's, uvicorn's and Granian's --reload, keep serving through a change and through a syntax error, then serve the same application over HTTPS with a development certificate and watch HTTP/2 negotiated over TLS.
 authors: [Graham Dumpleton]
 homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/reload-and-https-in-development
 issues: https://github.com/muruhq/muru-workshops/issues

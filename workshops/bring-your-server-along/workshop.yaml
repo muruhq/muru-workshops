@@ -24,7 +24,7 @@ env:
   MURU_STATE_DIR: muru/state
   MURU_LOG_DIR: muru/logs
   MURU_CACHE_DIR: muru/cache
-  MURU_CONFIG: muru/muru.toml
+  MURU_DAEMON_CONFIG: muru/muru.toml
 environment:
   requirements: requirements.txt
 variables:

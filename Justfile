@@ -47,7 +47,7 @@ skill:
 # to this root, such as workshops/<name>.
 # Start JupyterLab from the checkout, listing the workshops in each collection's order.
 [positional-arguments]
-lab *ARGS:
+lab *ARGS: _released
     uv run jupyter lab --config=jupyter_lab_config.py "$@"
 
 # Scaffold a new workshop under workshops/; extra args go to `jupyter workshop init`.
@@ -89,11 +89,11 @@ render NAME *ARGS:
 # temporary copy. Read the workshop first.
 # Self-test one workshop in a JupyterLab of its own; extra args go to `jupyter workshop test`.
 [positional-arguments]
-test NAME *ARGS:
+test NAME *ARGS: _released
     shift; uv run jupyter workshop test workshops/{{NAME}} "$@"
 
 # Self-test every workshop, writing a JUnit report for each.
-test-all:
+test-all: _released
     #!/usr/bin/env bash
     set -euo pipefail
     shopt -s nullglob
@@ -183,6 +183,108 @@ bump-muru TAG:
     git add reference/muru
     @echo "Now update muructl in every workshops/*/requirements.txt, then just test-all"
 
+# Workshops can be updated for the next Muru release before it is on
+# PyPI by running them against wheels built from a Muru checkout whose
+# Cargo.toml already carries that version. muructl comes from the
+# wheels through pip's find-links, so a workshop's requirements.txt
+# pins the coming version as it will once the release is out, and the
+# runtime library comes from them through MURU_WHEEL_DIR, which muructl
+# and the daemon read before PyPI. muructl keeps the library it
+# unpacks by version alone, so development runs keep theirs in a cache
+# of their own, never the user's, where a build of a version not yet
+# released would otherwise be taken for the release.
+muru_dev := justfile_directory() / ".muru-dev"
+
+# The extension rebuilds a workshop's environment only when its
+# requirements.txt changes, so environments made from other wheels are
+# removed here, with the rest of what the workshops left behind. The
+# runtime library is not abi3: its wheel is built for the Python that
+# runs JupyterLab, which every workshop environment is made from.
+# Build muru and muructl wheels from a Muru checkout, ../muru by default, for lab-dev and test-dev.
+wheels SRC="../muru":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    src=$(cd "{{SRC}}" && pwd)
+    python=$(uv run python -c 'import sys; print(sys.executable)')
+    wheels="{{muru_dev}}/wheels"
+
+    rm -rf "$wheels" "{{muru_dev}}/cache"
+    mkdir -p "$wheels"
+
+    (cd "$src/packages/muructl" && uvx --from 'maturin>=1.8,<2' maturin build --release --out "$wheels")
+    (cd "$src/packages/muru" && uvx --from 'maturin>=1.8,<2' maturin build --release --interpreter "$python" --out "$wheels")
+
+    just clean
+
+    version=$(basename "$wheels"/muructl-*.whl | cut -d- -f2)
+    echo "Built Muru $version from $src into $wheels"
+
+    stale=$(grep -L -x "muructl==$version" workshops/*/requirements.txt || true)
+
+    if [ -n "$stale" ]; then
+        echo "These workshops pin another muructl, and take it from PyPI under lab-dev and test-dev:"
+        echo "$stale" | sed 's/^/  /'
+    fi
+
+# Start JupyterLab as lab does, with the workshops installing Muru from the wheels `just wheels` built.
+[positional-arguments]
+lab-dev *ARGS: _wheels
+    #!/usr/bin/env bash
+    set -euo pipefail
+    touch "{{muru_dev}}/in-use"
+    export PIP_FIND_LINKS="{{muru_dev}}/wheels"
+    export MURU_WHEEL_DIR="{{muru_dev}}/wheels"
+    export MURU_CACHE_DIR="{{muru_dev}}/cache"
+    exec uv run jupyter lab --config=jupyter_lab_config.py "$@"
+
+# Self-test one workshop as test does, installing Muru from the wheels `just wheels` built.
+[positional-arguments]
+test-dev NAME *ARGS: _wheels
+    #!/usr/bin/env bash
+    set -euo pipefail
+    shift
+    export PIP_FIND_LINKS="{{muru_dev}}/wheels"
+    export MURU_WHEEL_DIR="{{muru_dev}}/wheels"
+    export MURU_CACHE_DIR="{{muru_dev}}/cache"
+    exec uv run jupyter workshop test "workshops/{{NAME}}" "$@"
+
+# Self-test every workshop as test-all does, installing Muru from the wheels `just wheels` built.
+test-all-dev: _wheels
+    #!/usr/bin/env bash
+    set -euo pipefail
+    shopt -s nullglob
+    export PIP_FIND_LINKS="{{muru_dev}}/wheels"
+    export MURU_WHEEL_DIR="{{muru_dev}}/wheels"
+    export MURU_CACHE_DIR="{{muru_dev}}/cache"
+    for dir in workshops/*/; do
+        name=$(basename "$dir")
+        echo "== $dir"
+        uv run jupyter workshop test "$dir" --junit "results-$name.xml"
+    done
+
+[private]
+_wheels:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if ! ls "{{muru_dev}}"/wheels/muructl-*.whl >/dev/null 2>&1; then
+        echo "No development wheels yet; run just wheels first" >&2
+        exit 1
+    fi
+
+# Environments lab-dev made hold muructl from the development wheels,
+# and a requirements.txt pinning the coming version reads the same
+# before and after the release, so the extension would go on using
+# them. lab-dev leaves a mark that lab and test refuse to start over
+# until clean has removed those environments.
+[private]
+_released:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [ -e "{{muru_dev}}/in-use" ]; then
+        echo "The workshop environments hold Muru from the development wheels; run just clean first" >&2
+        exit 1
+    fi
+
 # A workshop's kernelspec is registered for the user, outside the
 # checkout, so removing the environment directory leaves a kernel in
 # the launcher that points at a Python that no longer exists. The prune
@@ -191,11 +293,12 @@ bump-muru TAG:
 clean:
     rm -rf workshops/*/_workshop workshops/*/work workshops/*/dist workshops/*/scratch
     rm -f results-*.xml
+    rm -rf "{{muru_dev}}/in-use" "{{muru_dev}}/cache"
     find . -type d -name .ipynb_checkpoints -not -path "./.venv/*" -exec rm -rf {} +
     find . -type d -name __pycache__ -not -path "./.venv/*" -not -path "./scratch/*" -exec rm -rf {} +
     uv run jupyter workshop kernels --prune
 
 # Also remove the environment and the skill link; run `just install` afterwards.
 distclean: clean
-    rm -rf .venv .claude/skills/jupyterlab-workshop-authoring
+    rm -rf .venv .claude/skills/jupyterlab-workshop-authoring "{{muru_dev}}"
     git submodule deinit -f reference/jupyterlab-workshop reference/muru

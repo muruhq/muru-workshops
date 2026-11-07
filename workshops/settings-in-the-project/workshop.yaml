@@ -2,7 +2,7 @@ apiVersion: jupyterlab-workshop/v1alpha1
 name: settings-in-the-project
 title: Keep the run settings with the project
 version: 0.1.0
-description: Move a long muructl run command line into the project's [tool.muru] table, put how a checkout is served into [tool.muru.run] and one machine's own port into muru.local.toml, see what a flag or a misspelt key does, and what --print-config makes of it all for the daemon, compared with where gunicorn, uvicorn, Granian and mod_wsgi keep their settings.
+description: Move a long muructl run command line into the project's [tool.muru] table, put how a checkout is served into [tool.muru.run] and one machine's own port into muru.local.toml, see what a flag or a misspelt key does, where --print-config says each setting came from, and what muructl render writes for the daemon, compared with where gunicorn, uvicorn, Granian and mod_wsgi keep their settings.
 authors: [Graham Dumpleton]
 homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/settings-in-the-project
 issues: https://github.com/muruhq/muru-workshops/issues
@@ -52,9 +52,9 @@ finish: |
   checkout is served, its port among them, in `[tool.muru.run]`; and
   how one machine serves it in a `muru.local.toml` that is never
   committed. A flag wins over all of them for one run, a misspelt key
-  stops the run with the keys the table takes, and `--print-config`
-  writes what a run amounts to as the daemon's declarative
-  configuration, with nothing of the run table in it.
+  stops the run with the keys the table takes, `--print-config` shows
+  where each setting came from, and `muructl render` writes the
+  release the daemon would get, with nothing of the run table in it.
 
   Next is **A Flask project under muructl run**.
 

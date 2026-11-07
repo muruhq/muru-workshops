@@ -16,7 +16,7 @@ The site, a Flask application in `web.py` and a FastAPI application in
 ties them together. Nothing you do here needs you to type code.
 
 This workshop has an environment of its own with `muructl`, Flask,
-FastAPI and the `websockets` client installed, at Muru release 0.1.0a17.
+FastAPI and the `websockets` client installed, at Muru release 0.1.0a20.
 Create it first; it takes a minute.
 
 ```{environment-create}

@@ -66,13 +66,15 @@ out=$(curl -s --max-time 2 http://127.0.0.1:{{ app_port }}/where/async); printf 
 
 Both requests got `502`. In the terminal on the left:
 
-- five seconds in, `the event loop has not run for 5.1 s, past the
-  loop stall timeout of 5 s`, then `replacing it`, the two access log
-  lines, `502` with `reason=worker_stalled`, a new worker started,
-  `gave up 2 requests for the edge to answer`, and `worker.ready`;
+- five seconds in, the event `worker.loop_stalled: worker 0 (pid
+  ...): the event loop has not run for 5.1 s, past the loop stall
+  timeout of 5 s`, then `replacing it`, the two access log lines,
+  `502` with `reason=worker_stalled`, a new worker started, and `gave
+  up 2 requests for the edge to answer`;
 
-- the stalled worker's threads' stacks, with `muru-loop` in
-  `stall` at `main.py`'s `time.sleep(30)`, which is where to look;
+- the stalled worker's threads' stacks, with `muru-loop` in `stall` at
+  `main.py`'s `time.sleep(30)`, which is where to look, then the new
+  worker's `is ready`;
 
 - about fifteen seconds later, after the hard drain grace and the
   shutdown timeout, `did not stop, killing` and `replaced by pid ...`.

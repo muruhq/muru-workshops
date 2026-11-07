@@ -42,7 +42,8 @@ Read the startup lines from the top:
   the part of Muru that runs inside your application's Python. It is
   not installed beside Flask: `muructl` keeps the copy matching its own
   version in its cache and puts it on your application's path. The
-  first time it is needed, a line before this one says it was fetched.
+  first time it is needed, a line before this one says where it came
+  from: fetched from PyPI, or unpacked from a directory of wheels.
 
 - `muru.host[...]: preloaded shop:app` is the host, which imported
   `shop.py` once. The number in brackets is the host's process id.

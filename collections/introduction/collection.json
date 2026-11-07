@@ -90,7 +90,7 @@
     {
       "name": "reload-and-https-in-development",
       "title": "Reload, HTTPS and HTTP/2 on your laptop",
-      "description": "See what a muructl run development run replaces when you save, with no flag asked for, compared with gunicorn's and uvicorn's --reload, keep serving through a change and through a syntax error, then serve the same application over HTTPS with a development certificate and watch HTTP/2 negotiated over TLS.",
+      "description": "See what a muructl run development run replaces when you save, with no flag asked for, compared with gunicorn's, uvicorn's and Granian's --reload, keep serving through a change and through a syntax error, then serve the same application over HTTPS with a development certificate and watch HTTP/2 negotiated over TLS.",
       "tags": [
         "muru",
         "wsgi",

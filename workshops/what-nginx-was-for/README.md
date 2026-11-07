@@ -10,6 +10,6 @@ application's, and maintenance mode. A document puts the nginx
 configuration each one replaces beside it.
 
 About 30 minutes, in two terminals with a document and the code in an
-area above them. It installs `muructl` 0.1.0a17 into an environment of
+area above them. It installs `muructl` 0.1.0a20 into an environment of
 its own, serves on port 8080 unless you change it, and keeps the
 daemon's sockets in `/tmp/muru-edge`.

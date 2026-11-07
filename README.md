@@ -34,7 +34,7 @@ all.
 Where Muru fits among Python web servers, what it does while you
 develop, and how its daemon deploys releases without downtime, compared
 throughout with Apache and mod_wsgi, gunicorn, uvicorn and Granian.
-Each workshop installs Muru 0.1.0a17 into an environment of its own and
+Each workshop installs Muru 0.1.0a20 into an environment of its own and
 runs it in two terminals, with documents and the application shown
 above them. Workshops 7 to 10 run the daemon, which keeps its state
 in the workspace and its sockets in a short directory under `/tmp`.
@@ -111,7 +111,7 @@ A Flask, Django or FastAPI project taken through development under
 `muructl run` in depth: where its settings live, what each framework
 needs, the hooks around the fork, reload and HTTPS fitted to a real
 project, and what happens when a request hangs. Each workshop installs
-Muru 0.1.0a17, and the framework it teaches, into an environment of
+Muru 0.1.0a20, and the framework it teaches, into an environment of
 its own, and names the Meet Muru workshop it builds on. Workshops 2 to
 4 can be taken in any order, or only the one for your framework.
 
@@ -232,3 +232,32 @@ checkout. `just bump-muru <tag>` moves `reference/muru` to a Muru
 release tag, such as `v0.1.0-alpha.17`; then update `muructl` in
 every `workshops/*/requirements.txt` to the same release and run
 `just test-all`.
+
+## Ahead of a Muru release
+
+The workshops can be updated for the next Muru release before it is on
+PyPI, against a Muru checkout whose `Cargo.toml` already carries the
+coming version. With the Muru repository cloned beside this one, as
+`../muru`, and its Rust toolchain installed:
+
+```
+just wheels
+just lab-dev
+```
+
+`just wheels` builds `muru` and `muructl` wheels from `../muru` into
+`.muru-dev/wheels`, or from the checkout named, as in `just wheels
+reference/muru` after `git -C reference/muru checkout origin/develop`.
+It removes the workshops' environments and workspaces, which were made
+from other wheels, and lists the workshops whose `requirements.txt`
+pins another `muructl`. `just lab-dev` and `just test-dev <name>` are
+`just lab` and `just test <name>` with each workshop installing
+`muructl` from those wheels, and the runtime library coming from them
+too. Pin the coming version in a workshop's `requirements.txt`, as it
+will be once the release is out, for it to take the wheels.
+
+Run `just wheels` again after changing the checkout, with JupyterLab
+stopped, and `just clean` before going back to `just lab` or `just
+test`, which refuse to start over environments `just lab-dev` made.
+Changes that pin the coming version reach `main` once it is on PyPI,
+since Binder and the self-test on each push install from there.

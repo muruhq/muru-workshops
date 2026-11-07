@@ -1,16 +1,14 @@
 ---
-title: What the daemon gets
+title: What the run uses and what the daemon gets
 requires: [verify:config-written, verify:project-stopped]
 ---
 
-# What the daemon gets
+# What the run uses and what the daemon gets
 
-The table is not only for `muructl run`. Deploying the project
-directory to Muru's daemon reads the same table, so the settings that
-serve it on your laptop become its release's settings.
-
-`--print-config` shows what a run amounts to in the daemon's terms
-without serving anything. Stop the project and write it to a file.
+With settings in four places, it helps to see where each one came
+from. `--print-config` prints the settings a run would use, each with
+its source, and exits without serving. Stop the project, then ask what
+a run with one process would use.
 
 ```{interrupt}
 :id: stop-project
@@ -18,53 +16,65 @@ without serving anything. Stop the project and write it to a file.
 ```
 
 ```{execute}
-:id: print-config
+:id: print-settings
 :session: client
 :wait: prompt
-muructl run notes --port {{ app_port }} --print-config > notes-config.toml
+muructl run notes --processes 1 --print-config
+```
+
+Every layer is there. `processes` came from the command line, the
+entrypoint, `threads` and `hooks` from `[tool.muru]`, `port` from
+`muru.local.toml` and `access_log` from `[tool.muru.run]`, and the
+rest are defaults. The output has the shape of the project's own
+tables, the application's settings and then a `[run]` table, and ends
+with the interpreter the run would use.
+
+The application's table is not only for `muructl run`. Deploying the
+project directory to Muru's daemon reads the same `[tool.muru]`, so
+the settings that serve it on your laptop become its release's
+settings. `muructl render` writes the release a deploy of the project
+would make, as a file in the daemon's format, and needs no daemon.
+Write it beside the project as `muru.daemon.toml`, the name a file in
+the daemon's format takes when it is kept with code.
+
+```{execute}
+:id: render-release
+:session: client
+:wait: prompt
+muructl render notes notes > muru.daemon.toml
 ```
 
 ```{file-open}
-:title: Open notes-config.toml
-:path: notes-config.toml
+:title: Open muru.daemon.toml
+:path: muru.daemon.toml
 :area: viewer
 ```
 
 ```{verify}
 :id: config-written
-:label: The declarative configuration is written
+:label: The release is written in the daemon's format
 :substrate: shell
-:trigger: after:print-config
-grep '^\[app.notes.release.r1\]' notes-config.toml || { echo "notes-config.toml has no release in it. Write it with the action above."; exit 1; }
+:trigger: after:render-release
+grep '^\[app.notes.release.r1\]' muru.daemon.toml || { echo "muru.daemon.toml has no release in it. Write it with the action above."; exit 1; }
 ```
 
-It has three parts:
+Below the comments is one release, `[app.notes.release.r1]`: its
+source directory, then what `[tool.muru]` says, the entrypoint, two
+processes, two threads and the hooks module, with the soft timeout and
+the title in tables of their own. A setting left at its default is not
+written. The `--processes 1` was for one run, so it is not here.
 
-- `[[listener]]` and `[limits]`: the address from `--port` and the
-  limits the edge applies. Under the daemon these belong to the
-  daemon's own configuration file, since one daemon serves many
-  applications.
-
-- `[app.notes.release.r1]`: the release, named after the module of the
-  entrypoint, with the entrypoint, processes, threads and hooks from
-  the table, and the defaults `muructl run` filled in for the rest.
-
-- `[app.notes.release.r1.timeouts]` and `[app.notes.release.r1.env]`:
-  the soft timeout and the title from the table, beside the other
-  timeouts at their defaults.
-
-Nothing of `[tool.muru.run]` or `muru.local.toml` is in it: the
-listener's port came from the `--port` flag here, and would come from
-them otherwise, but how a checkout is served on a laptop is not the
-daemon's business, and `muructl deploy` ignores both.
-
-`muructl apply` takes a file like this one, and `muructl deploy` makes
-the release from the project directory itself, so `[tool.muru]` is the
-one place the application's settings live.
+Nothing of `[tool.muru.run]` or `muru.local.toml` is in it, and no
+listener. How a checkout is served on a laptop is not the daemon's
+business, and where the daemon listens is in its own configuration
+file. `muructl apply -f muru.daemon.toml` would make the daemon match
+the file, and `muructl deploy` makes the same release from the project
+directory itself, so `[tool.muru]` is the one place the application's
+settings live.
 
 gunicorn has `--print-config` too, which prints the settings its five
-sources add up to. Muru's is a step further on: the file it writes is
-what the daemon runs.
+sources add up to. Muru's also names the source of each, and `muructl
+render` goes a step further: what it writes is what the daemon runs.
 
 ```{verify}
 :id: project-stopped

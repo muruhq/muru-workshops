@@ -2,7 +2,7 @@ apiVersion: jupyterlab-workshop/v1alpha1
 name: reload-and-https-your-way
 title: Reload and HTTPS beyond the defaults
 version: 0.1.0
-description: Make a development run's reload watch a project's templates and data files and ignore the file it writes, watch a request in flight finish on the old release during a reload, put another name on the development certificate, redirect HTTP to HTTPS, serve a certificate from a CA of your own, then move every flag into the project's run table, compared with gunicorn's and uvicorn's options.
+description: Make a development run's reload watch a project's templates and data files and ignore the file it writes, watch a request in flight finish on the old release during a reload, put another name on the development certificate, redirect HTTP to HTTPS, serve a certificate from a CA of your own, then move every flag into the project's run table, compared with gunicorn's and uvicorn's options and Granian's for reloading.
 authors: [Graham Dumpleton]
 homepage: https://github.com/muruhq/muru-workshops/tree/main/workshops/reload-and-https-your-way
 issues: https://github.com/muruhq/muru-workshops/issues

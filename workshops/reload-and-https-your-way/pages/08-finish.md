@@ -23,9 +23,9 @@ You have fitted reload and HTTPS to a project.
 
 - Every one of those flags has a key in the project's `[tool.muru.run]`
   table, so `muructl run` on its own serves a checkout the way the
-  project says; a flag wins over the table for one run, a
+  project says. A flag wins over the table for one run, and a
   `muru.local.toml` beside the project holds one machine's own `[run]`
-  table, and `--print-config` writes the listeners the table resolves
-  to and nothing of the table itself.
+  table. `--print-config` shows which settings came from the table, and
+  `muructl render` shows that the daemon gets none of them.
 
 Click Finish below for where to go next.

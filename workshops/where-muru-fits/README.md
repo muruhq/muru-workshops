@@ -8,5 +8,5 @@ workers. It ends with what happens when a request or a worker fails,
 and how the same split lets the daemon run releases side by side.
 
 About 25 minutes, in two terminals with the documents and the
-application in a pane above them. It installs `muructl` 0.1.0a17 into an
+application in a pane above them. It installs `muructl` 0.1.0a20 into an
 environment of its own, and serves on port 8080 unless you change it.

@@ -57,11 +57,12 @@ terminal on the right stays free, with the answer written to
 curl -s "http://127.0.0.1:{{ app_port }}/checkout?item=teapt" -o order.txt &
 ```
 
-The terminal on the left says `muru: debug.breakpoint: worker 0 (pid
-...): breakpoint() at .../checkout.py:17 waits 300 s for muructl debug
-attach checkout --worker 0`, or worker 1. Nothing has come back to
-`curl`. The run's own commands can find the request: its worker's
-status shows one request in flight, and the stacks show where it is.
+The terminal on the left says `debug.breakpoint: worker 0 (pid ...):
+breakpoint() at .../checkout.py:17 waits 300 s for muructl debug attach
+checkout --worker 0`, or worker 1. Nothing has come back to `curl`.
+The run's own commands can find the request: its worker's status
+shows one of its four threads busy, under THREADS, and how long it has
+waited, under THREAD-OLDEST, and the stacks show where it is.
 
 ```{execute}
 :id: debug-status

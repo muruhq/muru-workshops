@@ -19,7 +19,7 @@ counts its requests with a metrics client, `metrics.py`. Both are
 already in your workspace. Nothing you do here needs you to type code.
 
 This workshop has an environment of its own with `muructl` installed, at
-release 0.1.0a17. Create it first; it takes a minute.
+release 0.1.0a20. Create it first; it takes a minute.
 
 ```{environment-create}
 :title: Create the workshop environment

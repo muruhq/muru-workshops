@@ -43,8 +43,8 @@ Everything the workshops say about Muru comes from its documentation,
 its source and the installed release, never from memory.
 
 - `reference/muru` is a git submodule of the Muru repository at the
-  tag of the release the workshops teach, `v0.1.0-alpha.17` (published
-  on PyPI as 0.1.0a17). The user documentation under `docs/tutorials`,
+  tag of the release the workshops teach, `v0.1.0-alpha.20` (published
+  on PyPI as 0.1.0a20). The user documentation under `docs/tutorials`,
   `docs/explanation` and `docs/howto` is authoritative for released
   behaviour. `CHANGELOG.md` says which release added what, which is how
   to tell whether a feature is released. The design specification
@@ -236,7 +236,7 @@ workshops 6 to 10:
   about ten seconds and sent no close frame.
 
 - The daemon with `MURU_STATE_DIR`, `MURU_LOG_DIR`, `MURU_CACHE_DIR`
-  and `MURU_CONFIG` relative to the working directory starts, deploys,
+  and `MURU_DAEMON_CONFIG` relative to the working directory starts, deploys,
   writes each release's log there, and `muructl logs` reads it. A
   deploy without `--python` uses `python3` from the `PATH` the daemon
   was started with, the workshop's environment.
@@ -341,15 +341,16 @@ on), asks what a client gets when its worker dies mid-POST (502 from
 the edge), sends `POST /crash`, and lists the processes to show the
 replacement forked from the same host. Page 7 opens `docs/releases.md`
 (the daemon, a separate edge, releases side by side, blue/green,
-canary, preview, rollback), runs `muructl run ... --print-config` to
-show the development run as a release table, and stops the server.
+canary, preview, rollback), runs `muructl render hello . ...` with
+the run's settings to show them as a release table, and stops the
+server.
 
 - Format: two terminals and files, with a viewer area for the
   documents and the application. Ships `hello.py`,
   `show_processes.py`, `docs/serving-python.md`,
   `docs/muru-processes.md` and `docs/releases.md`.
 
-- Requires: `muructl==0.1.0a17`; `curl` and `ps`.
+- Requires: `muructl==0.1.0a20`; `curl` and `ps`.
 
 - Source: `docs/explanation/architecture.md`,
   `docs/tutorials/first-wsgi-app.md`, `docs/howto/daemon.md`, and the
@@ -389,7 +390,7 @@ one), sends five rounds, describes what it shows, and stops the shop.
 - Format: two terminals and files, viewer area. Ships `shop.py`,
   `send_requests.py` and `docs/where-output-goes.md`.
 
-- Requires: `muructl==0.1.0a17`, `flask==3.1.3`;
+- Requires: `muructl==0.1.0a20`, `flask==3.1.3`;
   `curl`. Variables `app_port` (8080) and `dashboard_port` (8081).
 
 - Source: `docs/tutorials/first-wsgi-app.md`, `docs/howto/logging.md`,
@@ -402,8 +403,8 @@ one), sends five rounds, describes what it shows, and stops the shop.
 
 How close to production can a development run be?
 
-Page 2 opens `docs/reloading.md` (what gunicorn's and uvicorn's
-`--reload` and a `muructl run` development run, which reloads without
+Page 2 opens `docs/reloading.md` (what gunicorn's, uvicorn's and
+Granian's `--reload` and a `muructl run` development run, which reloads without
 a flag, replace, what requests get meanwhile, and
 what a change that fails to import leaves serving, with diagrams and a
 table) and `greeting.py`, whose first line carries `GREETING` and the
@@ -433,12 +434,13 @@ and is self-signed on every machine.
 - Format: two terminals and files, viewer area. Ships `greeting.py`,
   `watch.py` and `docs/reloading.md`.
 
-- Requires: `muructl==0.1.0a17`; `curl`. Variables
+- Requires: `muructl==0.1.0a20`; `curl`. Variables
   `app_port` (8080) and `https_port` (8443).
 
 - Source: `docs/tutorials/first-wsgi-app.md`, `docs/howto/https.md`,
   gunicorn's `workers/base.py` and `config.py`, uvicorn's
-  `supervisors/basereload.py`.
+  `supervisors/basereload.py`, Granian's `granian/server/common.py`
+  (`_serve_with_reloader` and `_stop_workers`).
 
 - Length: 20 minutes.
 
@@ -475,7 +477,7 @@ and stops the server.
   `catalog.py`, `hooks.py`, `fork_demo.py` and
   `docs/preload-and-fork.md`.
 
-- Requires: `muructl==0.1.0a17`; `curl`.
+- Requires: `muructl==0.1.0a20`; `curl`.
 
 - Source: `docs/explanation/preload.md`, `muructl run --help`,
   gunicorn's `preload_app` setting, uvicorn's `_subprocess.py`.
@@ -509,7 +511,7 @@ Binder has no free-threaded interpreter.
 - Format: two terminals and files, viewer area. Ships `work.py`,
   `load.py` and `docs/processes-and-threads.md`.
 
-- Requires: `muructl==0.1.0a17`; `curl`.
+- Requires: `muructl==0.1.0a20`; `curl`.
 
 - Source: `docs/explanation/process-models.md`, gunicorn's design
   documentation, Granian's README, mod_wsgi's `WSGIDaemonProcess`
@@ -554,7 +556,7 @@ closes it with `by=edge code=1001` at once.
   `docs/two-interfaces.md`. Variables `app_port` (8080) and
   `dashboard_port` (8081).
 
-- Requires: `muructl==0.1.0a17`, `flask==3.1.3`,
+- Requires: `muructl==0.1.0a20`, `flask==3.1.3`,
   `fastapi==0.162.0`, `websockets==17.3`; `curl`.
 
 - Source: `docs/howto/mounts.md`, `docs/howto/starlette-and-fastapi.md`,
@@ -591,7 +593,7 @@ on serving), and shuts the daemon down.
   `releases/v2`, `traffic.py`, `show_processes.py` and
   `docs/deploying.md`.
 
-- Requires: `muructl==0.1.0a17`; `curl`, `ps`.
+- Requires: `muructl==0.1.0a20`; `curl`, `ps`.
   Variables `app_port` (8080) and `muru_run_dir` (`/tmp/muru-deploy`).
 
 - Source: `docs/howto/daemon.md`, gunicorn's signals documentation.
@@ -621,7 +623,7 @@ down.
 - Format: two terminals and files, viewer area. Ships `releases/v1`
   to `v3`, `routes.toml`, `traffic.py` and `docs/canary.md`.
 
-- Requires: `muructl==0.1.0a17`; `curl`. Variables
+- Requires: `muructl==0.1.0a20`; `curl`. Variables
   `app_port` (8080) and `muru_run_dir` (`/tmp/muru-canary`).
 
 - Source: `docs/howto/rollouts.md`, `docs/howto/traffic.md`.
@@ -655,7 +657,7 @@ the daemon down.
   application, static files with a `.gz` variant, a report, two error
   pages), `site.toml` and `docs/nginx-and-the-edge.md`.
 
-- Requires: `muructl==0.1.0a17`; `curl`, `sed`.
+- Requires: `muructl==0.1.0a20`; `curl`, `sed`.
   Variables `app_port` (8080) and `muru_run_dir` (`/tmp/muru-edge`).
 
 - Source: `docs/howto/static-files.md`, `compression.md`,
@@ -670,7 +672,7 @@ Can an existing gunicorn deployment move to Muru one step at a time?
 Page 2 opens `docs/cutting-over.md` (a managed server release, a
 native release canaried against it, and when to choose which server)
 and `orders/orders.py`, whose responses name `SERVER_SOFTWARE`
-(`gunicorn/26.2.0`, then `muru/0.1.0a17`), starts the daemon and
+(`gunicorn/26.2.0`, then `muru/0.1.0a20`), starts the daemon and
 deploys `muructl deploy orders orders
 --server gunicorn -- gunicorn --workers 2 --bind '{bind}'
 orders:application`, shows gunicorn answering through the edge, the
@@ -687,7 +689,7 @@ another server.
   `routes.toml`, `traffic.py`, `show_processes.py` and
   `docs/cutting-over.md`.
 
-- Requires: `muructl==0.1.0a17`, `gunicorn==26.2.0`;
+- Requires: `muructl==0.1.0a20`, `gunicorn==26.2.0`;
   `curl`, `ps`. Variables `app_port` (8080) and `muru_run_dir`
   (`/tmp/muru-server`).
 
@@ -740,6 +742,91 @@ page helps. The framework workshops (2 to 4) can be taken in any order
 after the first; a learner who uses only one framework takes that one.
 Each edits the project through actions (`file-write` appends,
 `editor-insert`, `editor-replace`), so the learner still types nothing.
+
+### What was checked against 0.1.0a20
+
+Self-tested on CPython 3.14, macOS, on 2026-11-08, when the pins moved
+from 0.1.0a19 to 0.1.0a20, through `just test-all` with Muru from
+PyPI (the a19 record below stands for what it does not restate).
+
+- 0.1.0a20 changes how `muructl apply` starts the releases it adds
+  (the `serving` key, and held or stopped releases that do not serve;
+  muruhq/muru#420, #447, #449) and makes an apply atomic (#439). The
+  files applied in I.8, I.9 and I.10 declare no release or one, which
+  serves either way, and no page quotes what `apply` prints.
+- No workshop uses `muructl config export`, whose `--all-releases` is
+  gone (#451), or reaches the daemon over TLS, whose certificate choice
+  changed (#456, #458).
+
+### What was checked against 0.1.0a19
+
+Checked on CPython 3.14 in a scratch environment holding `muructl`
+alone, and self-tested on CPython 3.14, macOS, on 2026-11-07, when the
+pins moved from 0.1.0a17 to 0.1.0a19 (the a17 record below stands for
+what it does not restate). 0.1.0a19 was not yet on PyPI: both were
+done with wheels built from Muru's release commit by `just wheels`,
+through `just test-all-dev`.
+
+- `MURU_CONFIG` is now `MURU_DAEMON_CONFIG` (muruhq/muru#416): the four
+  workshops that run the daemon set it to `muru/muru.toml`, the
+  daemon's own file in its configuration directory, which keeps that
+  name. Only a file in the daemon's format kept beside code is
+  `muru.daemon.toml` (muruhq/muru#408).
+
+- `muructl run --print-config` prints the settings a run would use,
+  each with where it came from, the application's settings and then a
+  `[run]` table, and ends with the interpreter; it writes nothing in
+  the daemon's format (muruhq/muru#416). In II.1, `--processes 1`
+  with the tables of pages 3 and 4 and `muru.local.toml` shows all four
+  layers: `command line`, `[tool.muru] in notes/pyproject.toml`, `[run]
+  in notes/muru.local.toml` and `[tool.muru.run] in
+  notes/pyproject.toml`. The env and timeouts tables are not listed,
+  only named in a closing comment. In II.6, `https = false  # default`
+  sits beside `https_only = true`, the two being separate modes.
+
+- `muructl render APP SOURCE` (muruhq/muru#417) writes the release a
+  deploy would make, needing no daemon: I.1 with `--entrypoint
+  hello:application --processes 3 --threads 2`, II.1 and II.6 from the
+  project's `[tool.muru]` alone, with a relative `source` kept relative,
+  no `python` key unless one is named and nothing of `[tool.muru.run]`
+  or `muru.local.toml`.
+
+- The runtime library's first line says where it came from: `unpacked
+  the runtime library FILE from DIR, once` from a wheel directory, and
+  `fetched ... from PyPI, once` otherwise (muruhq/muru#354); I.2 says so.
+
+- An event is one line from the host starting with its kind
+  (muruhq/muru#368): `debug.breakpoint` (II.8), `request.soft_timeout`
+  (II.7), `worker.gil_stalled` (II.7), `worker.loop_stalled` (II.4),
+  `worker.exited` and `worker.timeout_killed`, the last carrying
+  `replaced by pid ...` about fifteen seconds after a hard timeout or a
+  stall. The quotes are updated, or still match as substrings.
+
+- `muructl debug status` shows a request waiting at `breakpoint()` as
+  `1/4` under THREADS and its age under THREAD-OLDEST, with STATE
+  `ready` and ROUTED `yes` until a debugger attaches (muruhq/muru#369);
+  II.8 reads those columns. The dashboard's workers table shows busy
+  threads in a Threads column (muruhq/muru#395); I.2 says so.
+
+- Unchanged for the workshops: the import check's `preload:` lines and
+  the `preload is true` refusal (I.4), the order of the hooks with
+  preload on and off (II.5, after muruhq/muru#365), the two-interface
+  serving line `2 workers of 4 threads and an event loop of
+  concurrency 1000` (I.6), the lifespan failure lines (II.4), and
+  `SERVER_SOFTWARE` as `muru/0.1.0a19` (I.10).
+
+- Granian 2.8.7's `--reload`, added to I.3 and II.6, read in its source
+  and run with two WSGI workers on macOS and in a `python:3.14-slim`
+  container: on a change the main process stops every worker, waiting
+  for each, then starts new ones; on macOS the requests sent meanwhile
+  waited about 0.1 s and none failed. New code that fails to import
+  makes the workers exit and Granian shut down, refusing connections;
+  with `--reload-ignore-worker-failure` it stays up with no worker, and
+  on macOS requests hang until their timeout. In the container, with
+  `--reload` alone and no change, about half the connections were
+  refused, with one worker or two, and none without `--reload`. The
+  workshops claim nothing about Linux timing for that reason, only
+  that no worker serves between the old workers and the new.
 
 ### What was checked against 0.1.0a17
 
@@ -1138,9 +1225,11 @@ the warning that a `.gitignore` written in the terminal does not cover
 it, adds the file to `.gitignore`, and quizzes where `reload_include` belongs
 (the run table, not the local file or `[tool.muru]`). Page 5 quizzes
 a flag against the table, runs `--processes 1`, then misspells
-`threads` and puts it right. Page 6 writes `--print-config` to
-`notes-config.toml`, opens it and reads its three parts, with nothing
-of the run table in them.
+`threads` and puts it right. Page 6 runs `--print-config` with
+`--processes 1` to show each setting with the layer it came from, then
+writes `muructl render notes notes` to `muru.daemon.toml`, opens it and
+reads the release, with nothing of the run table or the one-run flag
+in it.
 
 - Builds on Meet Muru 6. Variables `app_port` (8080) and `other_port`
   (8090). Requires the pins only.
@@ -1235,12 +1324,18 @@ Page 6: trustme's CA and `--tls-cert`. Page 7 writes
 `menu/pyproject.toml` with `[tool.muru]` and a `[tool.muru.run]` table
 holding every flag of the workshop as a key, runs plain `muructl run
 menu`, quizzes where a teammate's port belongs (`muru.local.toml`),
-and shows `--print-config` writing two listeners and nothing of the
-table. The manifest
+shows `--print-config` marking each key the table set, and `muructl
+render menu menu` writing the release with nothing of the table. The
+manifest
 sets `MURU_CACHE_DIR` and `CAROOT` as Meet Muru 3 does.
+`docs/reload-and-https.md` sets what counts as a change beside
+gunicorn's, uvicorn's and Granian's reload options.
 
 - Builds on Meet Muru 3. Variables `app_port` (8080) and `https_port`
   (8443). Requires `trustme==1.2.1`.
+
+- Source: Granian's `granian/cli.py` for its reload options, and
+  `watchfiles.filters.DefaultFilter` for what it ignores by default.
 
 - Length: 30 minutes.
 
@@ -1361,7 +1456,7 @@ and the hosts have it.
 
 **Muru is installed per workshop, pinned.** Each workshop declares an
 `environment` whose `requirements.txt` pins `muructl` to the release in
-`reference/muru`, written the PyPI way (`0.1.0a17`). An exact pin needs
+`reference/muru`, written the PyPI way (`0.1.0a20`). An exact pin needs
 no `--pre`. The runtime library, `muru`, is not installed: muructl puts
 the copy matching its own version on the application's path, unpacked
 once into its user cache, or into the workspace where a workshop sets
@@ -1429,7 +1524,7 @@ through the proxy, so HTTPS and HTTP/2 are shown with curl.
 
 **Daemon state stays in the workspace; its sockets do not.** A
 workshop that runs the daemon sets `MURU_STATE_DIR`, `MURU_LOG_DIR`,
-`MURU_CACHE_DIR` and `MURU_CONFIG` to paths relative to the workspace
+`MURU_CACHE_DIR` and `MURU_DAEMON_CONFIG` to paths relative to the workspace
 (`muru/state` and so on) in its manifest `env`, which works because
 every terminal and check runs there. The run directory cannot follow:
 it must be absolute, since a release's host runs elsewhere, and short,
@@ -1582,6 +1677,18 @@ the runtime library's wheel in its wheelhouse and names it to every
 session as `MURU_WHEEL_DIR`, so the six workshops that keep muructl's
 cache or the daemon's state in their workspace fetch nothing either
 (muru#344, muru-workshops#14). Every workshop self-tested again.
+
+On 2026-11-07 the pins moved to 0.1.0a19 (muru-workshops#17). The
+daemon workshops set `MURU_DAEMON_CONFIG`, workshops I.1, II.1 and II.6
+show `muructl render` for what the daemon gets and II.1 and II.6
+`--print-config` for where each setting came from, and the event lines
+quoted in I.2, II.4, II.7 and II.8 follow the host's one line per
+event. Every workshop self-tested against wheels built from the
+release commit before it reached PyPI.
+
+On 2026-11-08 the pins moved to 0.1.0a20 (muru-workshops#17), which
+needed no change to any page, and every workshop self-tested against it
+from PyPI.
 
 ### Meet Muru
 

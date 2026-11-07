@@ -47,8 +47,8 @@ The page refreshes every two seconds. Look for:
   latency, and the count of 5xx responses, which are the failing
   product's;
 
-- the two workers, each with four slots (its threads) and the
-  requests in flight on it;
+- the two workers, each with its busy threads of its four in the
+  Threads column, since a WSGI request holds a thread;
 
 - the charts of requests, errors and latency over time;
 

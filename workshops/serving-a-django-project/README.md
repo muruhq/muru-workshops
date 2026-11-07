@@ -11,6 +11,6 @@ async views on the worker's event loop and sync views on Django's
 threads. Compares with `runserver`, gunicorn, uvicorn and mod_wsgi.
 
 About 30 minutes, in two terminals with a document, the project's files
-and the site in a pane above them. It installs `muructl` 0.1.0a17 and
+and the site in a pane above them. It installs `muructl` 0.1.0a20 and
 Django 6.1.2 into an environment of its own, and serves on port 8080
 unless you change it.

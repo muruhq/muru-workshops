@@ -24,9 +24,9 @@ You have moved a project's server settings into the project.
   project's tables, for one run; a key a table does not know stops the
   run with a list of the keys it does.
 
-- `--print-config` writes what a run amounts to as the daemon's
-  declarative configuration: the listener and limits for the daemon's
-  own file, and the release made from `[tool.muru]`, with nothing of
+- `--print-config` prints the settings a run would use and where each
+  came from. `muructl render` writes the release a deploy would make,
+  in the daemon's format, from `[tool.muru]` alone, with nothing of
   the run table, which the daemon never reads.
 
 Click Finish below for where to go next.
