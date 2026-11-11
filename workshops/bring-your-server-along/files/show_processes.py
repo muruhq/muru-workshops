@@ -52,13 +52,21 @@ def is_daemon(words: list[str], port: str) -> bool:
     return words[1:3] == ["daemon", "run"] and listen.endswith(f":{port}")
 
 
-def describe(words: list[str], parent_words: list[str]) -> str:
+def describe(words: list[str], parent_words: list[str], releases: dict[str, str]) -> str:
     """Say what a process is, from its command line and its parent's."""
 
     name = os.path.basename(words[0])
 
     if name == "muructl" and words[1:3] == ["edge", "run"]:
         return "the edge: holds the listening socket, talks to every client"
+
+    if name == "muructl" and words[1:3] == ["relay", "run"]:
+        release = releases.get(os.path.dirname(option(words, "--control") or ""))
+
+        if release:
+            return f"the log relay of {release}: writes its host's and workers' output to its log"
+
+        return "a release's log relay: writes its host's and workers' output to its log"
 
     if "muru.host" in words:
         release = f"{option(words, '--name')}@{option(words, '--release')}"
@@ -90,6 +98,15 @@ def main() -> int:
         print(f"No Muru daemon is serving port {port}. Start it first.")
         return 1
 
+    # A release's log relay keeps its control socket beside its host's,
+    # so the directory says which release each relay belongs to.
+    releases = {}
+
+    for _, words in table.values():
+        if "muru.host" in words and option(words, "--control"):
+            directory = os.path.dirname(option(words, "--control"))
+            releases[directory] = f"{option(words, '--name')}@{option(words, '--release')}"
+
     children: dict[int, list[int]] = {}
 
     for pid, (parent, _) in table.items():
@@ -101,7 +118,7 @@ def main() -> int:
         what = (
             "the daemon: the controller, never on the request path"
             if depth == 0
-            else describe(words, parent_words)
+            else describe(words, parent_words, releases)
         )
 
         print(f"{'  ' * depth}pid {pid:<7} {what}")

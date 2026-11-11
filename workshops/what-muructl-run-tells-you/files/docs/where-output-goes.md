@@ -56,9 +56,9 @@ flowchart LR
     end
     E <-->|requests| W1[worker 0]
     E <-->|requests| W2[worker 1]
-    W1 -->|stdout and stderr| H[host]
-    W2 -->|stdout and stderr| H
-    H -->|tagged lines| T
+    W1 -->|stdout and stderr| R[log relay]
+    W2 -->|stdout and stderr| R
+    R -->|tagged lines| T
 ```
 
 - **Requests.** The edge writes an access log line for every request,
@@ -69,8 +69,9 @@ flowchart LR
   of to the terminal; the two together keep only the failures and slow
   requests, in a file.
 
-- **Your output.** The host relays each worker's standard output and
-  standard error to the terminal, tagged with the worker's index:
+- **Your output.** The log relay, a small process beside the host,
+  writes each worker's standard output and standard error to the
+  terminal, tagged with the worker's index:
   `muru.worker[0].stdout:` for what it prints, `muru.worker[0]:` for
   standard error, where Python's `logging` goes. You can tell which
   worker said what.

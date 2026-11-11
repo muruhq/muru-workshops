@@ -13,6 +13,6 @@ writes for the daemon, with nothing of the run table in it. Compares with where 
 keep their settings.
 
 About 25 minutes, in two terminals with a document and the project's
-files in an area above them. It installs `muructl` 0.1.0a20 into an
+files in an area above them. It installs `muructl` 0.1.0a23 into an
 environment of its own, and serves on ports 8080 and 8090 unless you
 change them.

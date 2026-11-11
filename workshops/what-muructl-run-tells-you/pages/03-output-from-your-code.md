@@ -32,10 +32,10 @@ something slow.
 :id: where-logging-goes
 question: Python's `logging` writes to standard error unless configured otherwise. How will the warning from the report view be tagged?
 options:
-  - { text: "`muru.worker[N].stdout:`, like the printed line", explanation: "That tag is for standard output. The host relays standard error separately." }
+  - { text: "`muru.worker[N].stdout:`, like the printed line", explanation: "That tag is for standard output. The log relay tags standard error separately." }
   - { text: "`muru.worker[N]:`, for the worker's standard error", correct: true }
-  - { text: "`muru:`, because muructl writes the log", explanation: "Lines starting `muru:` come from muructl itself. Your code's output is relayed by the host, tagged with the worker." }
-explanation: "The host relays each worker's standard error tagged `muru.worker[N]:` and its standard output tagged `muru.worker[N].stdout:`. Logging needs no configuring to arrive tagged."
+  - { text: "`muru:`, because muructl writes the log", explanation: "Lines starting `muru:` come from muructl itself. Your code's output is written by the release's log relay, tagged with the worker." }
+explanation: "The log relay, a small process beside the host, writes each worker's standard error tagged `muru.worker[N]:` and its standard output tagged `muru.worker[N].stdout:`. Logging needs no configuring to arrive tagged."
 ```
 
 ```{execute}

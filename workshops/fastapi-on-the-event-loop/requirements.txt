@@ -1,2 +1,2 @@
-muructl==0.1.0a20
+muructl==0.1.0a23
 fastapi==0.162.0

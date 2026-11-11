@@ -24,6 +24,10 @@ Under the daemon:
   workers. `r1`, serving, has its two workers; `r2`, retained, has its
   host and one worker, kept warm.
 
+- **Each release has a log relay** beside its host, which writes what
+  the host and the workers print to the release's log, so a log that
+  cannot keep up never holds up a request.
+
 - **The daemon** decides what runs and tells the edge where to send
   requests, but no request passes through it.
 

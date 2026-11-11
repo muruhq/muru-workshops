@@ -3,8 +3,9 @@
 Usage: python show_processes.py PORT
 
 Finds the muructl run started with --port PORT, then every process
-below it, and prints them as a tree with what each one does. The last
-line counts the workers.
+below it, and prints them as a tree with what each one does: the log
+relay first, then the host and its workers. The last line counts the
+workers.
 """
 
 import os
@@ -56,10 +57,19 @@ def short(args: str) -> str:
     words = args.split()
     words[0] = os.path.basename(words[0])
 
-    if "--socket-dir" in words:
-        words = words[: words.index("--socket-dir")]
+    for option in ("--socket-dir", "--control"):
+        if option in words:
+            words = words[: words.index(option)]
 
     return " ".join(words)
+
+
+def is_relay(args: str) -> bool:
+    """Say whether a command line is a release's log relay."""
+
+    words = args.split()
+
+    return os.path.basename(words[0]) == "muructl" and words[1:3] == ["relay", "run"]
 
 
 def main() -> int:
@@ -86,8 +96,15 @@ def main() -> int:
     print(f"pid {root:<7} {short(table[root][1])}")
     print(f"{'':12}the edge and the controller, written in Rust")
 
-    hosts = sorted(children.get(root, []))
+    hosts = []
     workers = []
+
+    for child in sorted(children.get(root, [])):
+        if is_relay(table[child][1]):
+            print(f"  pid {child:<7} {short(table[child][1])}")
+            print(f"{'':14}the log relay, in Rust: writes the host's and workers' output to the terminal")
+        else:
+            hosts.append(child)
 
     for host in hosts:
         print(f"  pid {host:<7} {short(table[host][1])}")

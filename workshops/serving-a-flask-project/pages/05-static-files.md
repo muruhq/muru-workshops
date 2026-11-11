@@ -82,13 +82,15 @@ worker: the edge answered from the directory, with an `ETag` and
 `Last-Modified`, and the workers never saw the request. A path under
 `/static/` that has no file still reaches Flask. `muructl logs
 --access` reads the run's access log from the other terminal, which
-the check below uses.
+the check below uses. It is run in `shop`, the project's directory,
+which is how it finds this run rather than a Muru daemon of your own
+that may be running.
 
 ```{execute}
 :id: read-access-log
 :session: client
 :wait: prompt
-curl -s -o /dev/null http://127.0.0.1:{{ app_port }}/static/shop.css; muructl logs --access --lines 1
+curl -s -o /dev/null http://127.0.0.1:{{ app_port }}/static/shop.css; (cd shop && muructl logs --access --lines 1)
 ```
 
 ```{verify}
@@ -96,7 +98,7 @@ curl -s -o /dev/null http://127.0.0.1:{{ app_port }}/static/shop.css; muructl lo
 :label: The edge serves the stylesheet
 :substrate: shell
 :trigger: after:read-access-log
-curl -s -o /dev/null --max-time 2 http://127.0.0.1:{{ app_port }}/static/shop.css; out=$(muructl logs --access --lines 1 2>&1); printf '%s\n' "$out" | grep 'GET /static/shop.css' | grep -o 'reason=static' || { printf '%s\n' "${out:-Nothing answers on port {{ app_port }}.}"; exit 1; }
+curl -s -o /dev/null --max-time 2 http://127.0.0.1:{{ app_port }}/static/shop.css; out=$(cd shop && muructl logs --access --lines 1 2>&1); printf '%s\n' "$out" | grep 'GET /static/shop.css' | grep -o 'reason=static' || { printf '%s\n' "${out:-muructl logs --access found no access log line. Check that the shop is running in the terminal on the left.}"; exit 1; }
 ```
 
 Under the daemon the same entry serves the directory from each

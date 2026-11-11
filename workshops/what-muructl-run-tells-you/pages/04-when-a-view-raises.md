@@ -27,8 +27,10 @@ that product in a pane, as a browser would.
 The page is Muru's, not Flask's. It gives the status, the reason
 `app_error`, the request id and the traceback, which in development
 is what you want to see without going to the terminal. In the terminal
-on the left, the same traceback is tagged with the worker, and the
-access log line ends `reason=app_error` and the same id.
+on the left, the same traceback is tagged with the worker, under the
+line `ERROR muru: the application raised an exception`: Muru logs it
+on its `muru` logger, so a project's own logging handlers get it too.
+The access log line ends `reason=app_error` and the same id.
 
 This works because `shop.py` sets `PROPAGATE_EXCEPTIONS`. Without it,
 Flask catches the exception itself and answers with a plain 500 page

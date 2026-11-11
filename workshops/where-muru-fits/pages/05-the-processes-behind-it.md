@@ -16,8 +16,11 @@ one does. Run it in the terminal on the right.
 python show_processes.py {{ app_port }}
 ```
 
-There are three processes. `muructl` is the edge and the controller,
-in Rust. The first `python -m muru.host` is the host, which imported
+There are four processes. `muructl run` is the edge and the
+controller, in Rust. `muructl relay run` is the log relay, in Rust
+too, which writes what the host and the workers print to the
+terminal, so a terminal that stops reading never holds up a request.
+The first `python -m muru.host` is the host, which imported
 `hello.py`. The second has the same command line because it is a fork
 of the host: that is the worker, which serves the requests with your
 code already loaded. gunicorn with `--preload` starts its workers the
@@ -34,7 +37,7 @@ question: "With `--processes 3`, how many Python processes will be running for t
 answer: "4"
 wrong:
   - { text: "3", explanation: "Three workers, but the host they were forked from is a Python process too, and it stays running to replace any worker that dies." }
-  - { text: "5", explanation: "muructl is not a Python process: the edge and the controller are written in Rust. Count the host and the workers." }
+  - { text: "5", explanation: "Neither muructl process is Python: the edge, the controller and the log relay are written in Rust. Count the host and the workers." }
 otherwise: "Count the host, which is a Python process, and one process for each worker."
 explanation: "The host plus three workers makes four. The host stays running so it can fork a replacement for any worker that dies."
 ```

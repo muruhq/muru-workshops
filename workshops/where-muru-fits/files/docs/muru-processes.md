@@ -1,7 +1,7 @@
 # How Muru serves an application
 
-Muru gives the work of serving an application to three kinds of
-process, each with one job.
+Muru gives the work of serving an application to processes of a few
+kinds, each with one job.
 
 ```mermaid
 flowchart LR
@@ -24,6 +24,11 @@ flowchart LR
   code already loaded. When a worker dies, the host forks a
   replacement.
 
+- **The log relay**, one beside each host and written in Rust, reads
+  what the host and the workers print and writes it out, tagged with
+  the worker it came from. A terminal or a log file that stops keeping
+  up holds up the relay alone, never a request.
+
 - **Workers** run your code: WSGI applications on a pool of threads,
   ASGI applications on an event loop. A worker never talks to a client.
   It gets each request from the edge over a private link, already
@@ -42,15 +47,19 @@ flowchart LR
         K[Controller]
     end
     K -. starts .-> H[Host<br/>python -m muru.host]
+    K -. starts .-> R[Log relay<br/>muructl relay run]
     H -. fork .-> W1[Worker]
     H -. fork .-> W2[Worker]
     E -->|worker link| W1
     E -->|worker link| W2
+    W1 -. output .-> R
+    W2 -. output .-> R
 ```
 
 `muructl run` is the development mode. The edge and the controller run
 inside the one `muructl` process, which starts a host for your
-application, and the host forks the workers. It serves on the loopback
+application and a log relay beside it, and the host forks the
+workers. It serves on the loopback
 address only, and error pages show the traceback.
 
 ## The same comparison, with Muru
