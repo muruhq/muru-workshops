@@ -18,7 +18,7 @@ hard timeout of eight, and ask for a checkout again.
 :id: start-with-timeouts
 :session: server
 :wait: 3s
-muructl run checkout:application --port {{ app_port }} --processes 2 --timeout soft=2s --timeout hard=8s
+muructl run checkout:application --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --processes 2 --timeout soft=2s --timeout hard=8s
 ```
 
 ```{quiz}

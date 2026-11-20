@@ -55,7 +55,7 @@ dir = "shop/static"
 :id: start-edge-static
 :session: server
 :wait: 3s
-muructl run shop --port {{ app_port }}
+muructl run shop --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 The startup lines include `muru: static /static/ from shop/shop/static`.

@@ -5,27 +5,35 @@ requires: [verify:three-workers, quiz:how-many-python]
 
 # The processes behind it
 
-`show_processes.py` in your workspace finds the `muructl run` serving
-port {{ app_port }} and lists every process below it, saying what each
-one does. Run it in the terminal on the right.
+`muructl status --processes` asks the run for every process it started
+and lists them as a tree, saying what each one is for. Run from the
+directory the run was started in, as here, it finds the run on its
+own. Run it in the terminal on the right.
 
 ```{execute}
 :id: show-one-worker
 :session: client
 :wait: prompt
-python show_processes.py {{ app_port }}
+muructl status --processes
 ```
 
-There are four processes. `muructl run` is the edge and the
-controller, in Rust. `muructl relay run` is the log relay, in Rust
-too, which writes what the host and the workers print to the
-terminal, so a terminal that stops reading never holds up a request.
-The first `python -m muru.host` is the host, which imported
-`hello.py`. The second has the same command line because it is a fork
-of the host: that is the worker, which serves the requests with your
-code already loaded. gunicorn with `--preload` starts its workers the
-same way, but there each worker also talks to clients. Here the worker
-only ever talks to the edge.
+The first line is the edge's figures over the last second. Below it
+are four processes. `run` is `muructl run` itself, the edge and the
+controller, in Rust, with the port it serves. `host` is a Python
+process that imported `hello.py`, with the release it belongs to,
+`r1`. Under it, `relay` is the host's log relay, in Rust too, which
+writes what the host and the workers print to the terminal, so a
+terminal that stops reading never holds up a request. `worker` is a
+fork of the host, worker 0, which serves the requests with your code
+already loaded. gunicorn with `--preload` starts its workers the same
+way, but there each worker also talks to clients. Here the worker only
+ever talks to the edge.
+
+Each row gives the process's uptime, CPU and memory, and a worker's
+`BUSY` how many of its threads are serving a request. `ps` shows the
+same processes by the names they give themselves, such as `muru worker
+hello@r1 default/0 (run:{{ app_port }})`: the role, the release, the
+worker's group and number, and the Muru instance it belongs to.
 
 `muructl run` started one worker of four threads, which is plenty on a
 laptop. You can ask for more.
@@ -54,14 +62,14 @@ threads each.
 :id: start-three-workers
 :session: server
 :wait: 3s
-muructl run hello:application --port {{ app_port }} --processes 3 --threads 2
+muructl run hello:application --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --processes 3 --threads 2
 ```
 
 ```{execute}
 :id: show-three-workers
 :session: client
 :wait: prompt
-python show_processes.py {{ app_port }}
+muructl status --processes
 ```
 
 ```{verify}
@@ -69,7 +77,7 @@ python show_processes.py {{ app_port }}
 :label: Three workers are serving
 :substrate: shell
 :trigger: after:show-three-workers
-out=$(python show_processes.py {{ app_port }} 2>&1); printf '%s\n' "$out" | tail -n 1 | grep '^3 workers' || { printf '%s\n' "$out"; exit 1; }
+out=$(muructl status --processes 2>&1); n=$(printf '%s\n' "$out" | grep -c ' worker  '); if [ "$n" = 3 ]; then echo "3 workers are serving"; else printf '%s\n' "$out"; exit 1; fi
 ```
 
 Load the application a few times. The edge sends each request to the

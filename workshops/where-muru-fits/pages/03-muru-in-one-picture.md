@@ -35,7 +35,7 @@ Start the application in the terminal on the left. The argument is
 :id: start-server
 :session: server
 :wait: 3s
-muructl run hello:application --port {{ app_port }}
+muructl run hello:application --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 Read what it printed, from the top. The lines starting `muru.host` are
@@ -44,8 +44,9 @@ application, and started one worker. The lines starting `muru:` are
 `muructl` itself, saying where it serves, with how many workers and
 threads, and what development mode does differently. The lines after
 that name the development dashboard, which the next workshop explains,
-the run's admin socket, and the directory the run watches so a saved
-change starts a new release, which workshop 3 shows.
+the run's process id and admin socket, the directory `muructl`'s own
+commands reach this run from, and the directory the run watches so a
+saved change starts a new release, which workshop 3 shows.
 
 ```{verify}
 :id: server-up
@@ -57,8 +58,10 @@ curl -sS --max-time 2 http://127.0.0.1:{{ app_port }}/
 
 ```{hint}
 :title: If the check fails
-Look at the terminal on the left. "Address already in use" means
-another program has port {{ app_port }}: change `app_port` from the
-gear button in the header of this panel, then start the server again.
-If it says nothing at all yet, give it a few seconds and click Check.
+Look at the terminal on the left. "is in use by", followed by a
+program and its process id, means another program has the port it
+names, {{ app_port }} or the dashboard's {{ dashboard_port }}: change
+`app_port` or `dashboard_port` from the gear button in the header of
+this panel, then start the server again. If it says nothing at all
+yet, give it a few seconds and click Check.
 ```

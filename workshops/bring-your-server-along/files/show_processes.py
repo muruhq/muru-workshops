@@ -2,18 +2,24 @@
 
 Usage: python show_processes.py PORT
 
-Finds the muructl daemon started with --listen on PORT, then every
-process below it, and prints them as a tree, saying what each one is
-and which release it belongs to.
+Asks `muructl daemon status` for the daemon this workspace's settings
+name, checks that it serves PORT, then lists every process below it as
+a tree, saying what each one is and which release it belongs to.
+
+Every process of Muru's names itself in its title, which is what ps
+shows in place of its command line: `muru edge`, then `muru relay`,
+`muru host` and `muru worker`, each with its release, such as
+`muru worker greeter@r2 default/1`. A managed server's processes keep
+their own command lines, below a log relay of their own.
 """
 
-import os
+import json
 import subprocess
 import sys
 
 
-def process_table() -> dict[int, tuple[int, list[str]]]:
-    """Return every process as pid -> (parent pid, command line words)."""
+def process_table() -> dict[int, tuple[int, str]]:
+    """Return every process as pid -> (parent pid, title or command line)."""
 
     output = subprocess.run(
         ["ps", "-e", "-o", "pid=,ppid=,args="],
@@ -28,61 +34,60 @@ def process_table() -> dict[int, tuple[int, list[str]]]:
         fields = line.split(None, 2)
 
         if len(fields) == 3:
-            table[int(fields[0])] = (int(fields[1]), fields[2].split())
+            table[int(fields[0])] = (int(fields[1]), fields[2].strip())
 
     return table
 
 
-def option(words: list[str], name: str) -> str | None:
-    """Return the value after an option, if the command line has it."""
+def daemon_pid(port: str) -> int | None:
+    """Return the pid of the daemon this workspace names, if it serves the port."""
 
-    for word, following in zip(words, words[1:]):
-        if word == name:
-            return following
+    answer = subprocess.run(
+        ["muructl", "daemon", "status", "--json"],
+        capture_output=True,
+        text=True,
+    )
 
-    return None
+    if answer.returncode != 0:
+        return None
+
+    status = json.loads(answer.stdout)
+
+    if not any(listener.endswith(f":{port}") for listener in status.get("listeners", [])):
+        return None
+
+    return status.get("pid")
 
 
-def is_daemon(words: list[str], port: str) -> bool:
-    if len(words) < 3 or os.path.basename(words[0]) != "muructl":
-        return False
+def describe(title: str, parent_title: str) -> str:
+    """Say what a process is, from its title and its parent's."""
 
-    listen = option(words, "--listen") or "127.0.0.1:8080"
+    words = title.split()
 
-    return words[1:3] == ["daemon", "run"] and listen.endswith(f":{port}")
-
-
-def describe(words: list[str], parent_words: list[str], releases: dict[str, str]) -> str:
-    """Say what a process is, from its command line and its parent's."""
-
-    name = os.path.basename(words[0])
-
-    if name == "muructl" and words[1:3] == ["edge", "run"]:
+    if words[:2] == ["muru", "edge"]:
         return "the edge: holds the listening socket, talks to every client"
 
-    if name == "muructl" and words[1:3] == ["relay", "run"]:
-        release = releases.get(os.path.dirname(option(words, "--control") or ""))
+    if words[:2] == ["muru", "relay"] and len(words) >= 3:
+        release = words[2]
 
-        if release:
-            return f"the log relay of {release}: writes its host's and workers' output to its log"
+        if len(words) >= 5 and words[3] == "instance":
+            return f"the log relay of {release}'s server: writes its output to the release's log"
 
-        return "a release's log relay: writes its host's and workers' output to its log"
+        return f"the log relay of {release}: writes its host's and workers' output to its log"
 
-    if "muru.host" in words:
-        release = f"{option(words, '--name')}@{option(words, '--release')}"
+    if words[:2] == ["muru", "host"] and len(words) >= 3:
+        return f"the host of {words[2]}: imported the code, forks the workers"
 
-        if "muru.host" in parent_words:
-            return f"a worker of {release}, forked from its host"
+    if words[:2] == ["muru", "worker"] and len(words) >= 4:
+        return f"worker {words[3]} of {words[2]}, forked from its host"
 
-        return f"the host of {release}: imported the code, forks the workers"
-
-    if "gunicorn" in " ".join(words):
-        if "gunicorn" in " ".join(parent_words):
+    if "gunicorn" in title:
+        if "gunicorn" in parent_title:
             return "a gunicorn worker"
 
-        return "gunicorn's master process, started by the daemon"
+        return "gunicorn's master process, run by its log relay"
 
-    return " ".join([name] + words[1:4])
+    return " ".join(words[:4])
 
 
 def main() -> int:
@@ -91,21 +96,12 @@ def main() -> int:
         return 2
 
     port = sys.argv[1]
+    daemon = daemon_pid(port)
     table = process_table()
-    daemons = [pid for pid, (_, words) in table.items() if is_daemon(words, port)]
 
-    if not daemons:
+    if daemon is None or daemon not in table:
         print(f"No Muru daemon is serving port {port}. Start it first.")
         return 1
-
-    # A release's log relay keeps its control socket beside its host's,
-    # so the directory says which release each relay belongs to.
-    releases = {}
-
-    for _, words in table.values():
-        if "muru.host" in words and option(words, "--control"):
-            directory = os.path.dirname(option(words, "--control"))
-            releases[directory] = f"{option(words, '--name')}@{option(words, '--release')}"
 
     children: dict[int, list[int]] = {}
 
@@ -113,12 +109,12 @@ def main() -> int:
         children.setdefault(parent, []).append(pid)
 
     def show(pid: int, depth: int) -> None:
-        parent, words = table[pid]
-        parent_words = table.get(parent, (0, []))[1]
+        parent, title = table[pid]
+        parent_title = table.get(parent, (0, ""))[1]
         what = (
             "the daemon: the controller, never on the request path"
             if depth == 0
-            else describe(words, parent_words, releases)
+            else describe(title, parent_title)
         )
 
         print(f"{'  ' * depth}pid {pid:<7} {what}")
@@ -126,7 +122,7 @@ def main() -> int:
         for child in sorted(children.get(pid, [])):
             show(child, depth + 1)
 
-    show(daemons[0], 0)
+    show(daemon, 0)
 
     return 0
 

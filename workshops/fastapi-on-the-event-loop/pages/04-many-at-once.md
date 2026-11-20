@@ -28,8 +28,9 @@ each as a task that awaited. Now the plain `def`.
 python load.py {{ app_port }} /wait/sync 50
 ```
 
-About half a second, two rounds: AnyIO runs 40 at once, and the last
-ten waited for a thread. Now `asyncio.to_thread`.
+About a second and a half, seven rounds: FastAPI hands a plain `def`
+to AnyIO's threads, but Muru limits AnyIO to its own eight sync
+threads, so all but eight waited for one. Now `asyncio.to_thread`.
 
 ```{execute}
 :id: load-to-thread
@@ -38,9 +39,11 @@ ten waited for a thread. Now `asyncio.to_thread`.
 python load.py {{ app_port }} /wait/to-thread 50
 ```
 
-About a second and a half: seven rounds of Muru's eight sync threads.
-That pool is the one to size for an application that hands much of its
-work to `asyncio.to_thread`, or that runs Django's `sync_to_async`.
+About a second and a half again: seven rounds of the same eight.
+`--sync-threads` sizes both, the pool behind `asyncio.to_thread` and
+how many threads AnyIO may use, so it is the one to size for an
+application with many plain `def` path operations, that hands much of
+its work to `asyncio.to_thread`, or that runs Django's `sync_to_async`.
 Stop the service and start it with fifty.
 
 ```{interrupt}
@@ -52,7 +55,7 @@ Stop the service and start it with fifty.
 :id: start-fifty
 :session: server
 :wait: 4s
-muructl run main:app --port {{ app_port }} --sync-threads 50
+muructl run main:app --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --sync-threads 50
 ```
 
 ```{execute}

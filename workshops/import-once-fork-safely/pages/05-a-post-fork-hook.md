@@ -41,7 +41,7 @@ Start the catalogue again, still with `--preload true`, and with
 :id: start-with-hook
 :session: server
 :wait: 3s
-muructl run catalog:application --port {{ app_port }} --processes 2 --preload true --hooks hooks
+muructl run catalog:application --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --processes 2 --preload true --hooks hooks
 ```
 
 No `preload:` lines this time: the import was clean, so the host

@@ -51,8 +51,10 @@ muructl rollout status greeter
 ```
 
 The message says which gate failed, at which step, and with what
-numbers, `r3`'s 5xx rate beside `r2`'s. `r3` is kept warm, out of
-traffic, so its logs and workers can be looked at:
+numbers, `r3`'s 5xx rate beside `r2`'s. `r3` is out of traffic and
+kept for ten minutes, so its logs and workers can be looked at. The
+list may show it `draining` for a moment, then `retained`, kept for
+inspection and not a rollback target:
 
 ```{execute}
 :id: list-r3

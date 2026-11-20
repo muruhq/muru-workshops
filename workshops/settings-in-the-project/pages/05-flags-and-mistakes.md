@@ -29,7 +29,7 @@ Stop the project and start it with one worker.
 :id: start-one-worker
 :session: server
 :wait: 3s
-muructl run notes --port {{ app_port }} --processes 1
+muructl run notes --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --processes 1
 ```
 
 The serving line says `1 worker of 2 threads`: the processes from the
@@ -56,12 +56,12 @@ thread = 2
 :id: start-with-typo
 :session: server
 :wait: prompt
-muructl run notes --port {{ app_port }}
+muructl run notes --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 Nothing starts. The error points at the line, says ``unknown field
 `thread` ``, and lists every key the table takes, from `entrypoint` to
-`maintenance`. A key the table does not know is never ignored, so a
+`commands`. A key the table does not know is never ignored, so a
 setting cannot silently fail to apply. Put it right and start the
 project again.
 
@@ -77,7 +77,7 @@ threads = 2
 :id: start-fixed
 :session: server
 :wait: 3s
-muructl run notes --port {{ app_port }}
+muructl run notes --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 ```{verify}

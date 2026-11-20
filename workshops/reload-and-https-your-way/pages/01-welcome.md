@@ -19,7 +19,7 @@ workspace, is already there. Nothing you do here needs you to type
 code.
 
 This workshop has an environment of its own with `muructl` and `trustme`
-installed, at Muru release 0.1.0a23. Create it first; it takes a minute.
+installed, at Muru release 0.1.0a33. Create it first; it takes a minute.
 
 ```{environment-create}
 :title: Create the workshop environment
@@ -49,5 +49,7 @@ The project is served on port {{ app_port }} and, over HTTPS, on port
 {{ https_port }}. If something else already uses either of them, open
 the Variables dialog from the gear button in the header of this panel
 and change `app_port` or `https_port`. Every command in the workshop
-uses the new values.
+uses the new values. Each run also serves a dashboard on port
+{{ dashboard_port }}; change `dashboard_port` the same way if that one
+is taken.
 ```

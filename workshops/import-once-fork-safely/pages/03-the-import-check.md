@@ -15,7 +15,7 @@ Serve the catalogue with two workers in the terminal on the left.
 :id: start-auto
 :session: server
 :wait: 3s
-muructl run catalog:application --port {{ app_port }} --processes 2
+muructl run catalog:application --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --processes 2
 ```
 
 Read the lines starting `preload:`. The host imported the catalogue,
@@ -49,8 +49,9 @@ itself, so each has its own socket and its own sender thread.
 
 ```{hint}
 :title: If the check fails
-Look at the terminal on the left. "Address already in use" means
-another program has port {{ app_port }}: change `app_port` from the
-gear button in the header of this panel, then start the catalogue
-again.
+Look at the terminal on the left. "is in use by", followed by a
+program and its process id, means another program has the port it
+names, {{ app_port }} or the dashboard's {{ dashboard_port }}: change
+`app_port` or `dashboard_port` from the gear button in the header of
+this panel, then start the catalogue again.
 ```

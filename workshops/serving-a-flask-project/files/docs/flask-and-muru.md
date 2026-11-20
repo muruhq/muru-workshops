@@ -44,9 +44,11 @@ the host instead, before the fork, as gunicorn's `--preload` does.
 That shares one build between the workers, which is only safe when the
 factory opens nothing a process cannot share.
 
-Without `--factory`, Muru takes `create_app` for the application
-itself, as any WSGI server would, and calls it with each request's
-environment.
+Without `--factory`, Muru would take `create_app` for the application
+itself, as any WSGI server would, and call it with each request's
+environment. A callable that takes no arguments cannot be a WSGI
+application, so Muru refuses it at load instead, naming `factory =
+true` as the setting to add.
 
 ## Logging
 

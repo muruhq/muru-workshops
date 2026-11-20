@@ -12,7 +12,7 @@ same event loop.
 :id: start-one
 :session: server
 :wait: 4s
-muructl run main:app --port {{ app_port }}
+muructl run main:app --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 Each `/where` path operation answers with the thread it ran on. The
@@ -35,7 +35,7 @@ options:
   - { text: "One of AnyIO's worker threads, where FastAPI sends plain def path operations", correct: true }
   - { text: "muru-loop, like the async def", explanation: "FastAPI never runs a plain def on the loop, since it might block it." }
   - { text: "One of Muru's sync threads, muru-sync_N", explanation: "Those are the loop's default executor, which asyncio.to_thread uses. FastAPI uses AnyIO's own threads instead." }
-explanation: "FastAPI runs a plain def path operation with AnyIO's to_thread.run_sync, on AnyIO's worker threads. Muru's sync threads serve asyncio.to_thread and sync_to_async."
+explanation: "FastAPI runs a plain def path operation with AnyIO's to_thread.run_sync, on AnyIO's worker threads. Muru's sync threads serve asyncio.to_thread and sync_to_async, and Muru limits AnyIO's threads to as many."
 ```
 
 ```{execute}

@@ -72,11 +72,12 @@ curl -sS --max-time 2 -o /dev/null -w '%{http_code}\n' http://127.0.0.1:{{ app_p
 
 ```{hint}
 :title: If the check fails
-Look at the terminal on the left. "Address already in use" means
-another program has port {{ app_port }}: change `app_port` from the
-gear button in the header of this panel, then start the site again. If
-the dashboard line says `no dashboard`, the site is still running, but
-change `dashboard_port` before the dashboard is opened. Importing
-FastAPI takes a moment; if nothing is printed yet, give it a few
-seconds and click Check.
+Look at the terminal on the left. "is in use by", followed by a
+program and its process id, means another program has port
+{{ app_port }}: change `app_port` from the gear button in the header
+of this panel, then start the site again. An error naming the
+dashboard's address means the same for port {{ dashboard_port }}:
+change `dashboard_port` and start the site again. Importing FastAPI
+takes a moment; if
+nothing is printed yet, give it a few seconds and click Check.
 ```

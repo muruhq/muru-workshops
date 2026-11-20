@@ -31,7 +31,7 @@ still finds the table, so the processes still come from it.
 :id: start-asgi
 :session: server
 :wait: 4s
-muructl run mysite.asgi:application --chdir mysite --port {{ app_port }}
+muructl run mysite.asgi:application --chdir mysite --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 `mysite.asgi:application is served as ASGI`, and the serving line

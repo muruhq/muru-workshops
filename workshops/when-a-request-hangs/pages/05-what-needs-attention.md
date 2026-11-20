@@ -20,7 +20,7 @@ service with the health checks left out of the access log.
 :id: start-exclude
 :session: server
 :wait: 3s
-muructl run accounts:application --port {{ app_port }} --access-log-exclude /health
+muructl run accounts:application --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --access-log-exclude /health
 ```
 
 ```{execute}
@@ -43,7 +43,7 @@ than a second.
 :id: start-errors
 :session: server
 :wait: 3s
-muructl run accounts:application --port {{ app_port }} --access-log errors --slow 1s
+muructl run accounts:application --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --access-log errors --slow 1s
 ```
 
 ```{execute}

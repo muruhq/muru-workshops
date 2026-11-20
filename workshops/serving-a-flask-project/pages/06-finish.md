@@ -7,8 +7,8 @@ title: Finish
 You have served a Flask project under `muructl run`.
 
 - A factory has to be named as one, with `factory = true` or
-  `--factory`. Otherwise it is taken for the application and every
-  request calls it.
+  `--factory`. Otherwise Muru refuses it at load, naming the setting
+  to add.
 
 - Named, it runs in each worker after the fork, so the database pool
   it opens belongs to that worker. `factory_phase = "host"` builds the

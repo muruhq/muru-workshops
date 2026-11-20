@@ -11,7 +11,7 @@ every task has to keep: never hold the loop without awaiting.
 flowchart TB
     E[edge] --> L["worker's event loop<br/>muru-loop"]
     L -->|async def| A[runs on the loop itself]
-    L -->|plain def path operation| T["AnyIO's worker threads<br/>FastAPI arranges it, 40 at once"]
+    L -->|plain def path operation| T["AnyIO's worker threads<br/>FastAPI arranges it, as many as Muru's sync threads"]
     L -->|asyncio.to_thread, sync_to_async| P["the loop's default executor<br/>Muru's sync threads, 8 by default"]
 ```
 
@@ -20,7 +20,9 @@ flowchart TB
 
 - A plain `def` path operation is handed to a thread by FastAPI, with
   AnyIO's `to_thread.run_sync`, so it may block. AnyIO lets 40 of
-  them run at once by default; the rest wait for a thread.
+  them run at once by default, but Muru sets its limit to
+  `--sync-threads`, so under Muru as many run at once as there are
+  sync threads; the rest wait for a thread.
 
 - `asyncio.to_thread()`, and asgiref's `sync_to_async`, use the
   event loop's default executor. Under Muru that is a pool of

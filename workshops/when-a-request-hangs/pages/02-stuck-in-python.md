@@ -31,7 +31,7 @@ Start the service with a soft timeout of two seconds.
 :id: start-soft
 :session: server
 :wait: 3s
-muructl run accounts:application --port {{ app_port }} --timeout soft=2s
+muructl run accounts:application --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --timeout soft=2s
 ```
 
 ```{execute}
@@ -51,9 +51,11 @@ curl -s -o /dev/null --max-time 10 -w '%{http_code}\n' http://127.0.0.1:{{ app_p
 
 ```{hint}
 :title: If the check fails
-Look at the terminal on the left. "Address already in use" means
-another program has port {{ app_port }}: change `app_port` from the
-gear button in the header of this panel, then start the service again.
+Look at the terminal on the left. "is in use by", followed by a
+program and its process id, means another program has the port it
+names, {{ app_port }} or the dashboard's {{ dashboard_port }}: change
+`app_port` or `dashboard_port` from the gear button in the header of
+this panel, then start the service again.
 ```
 
 `504` after two seconds. In the terminal on the left:

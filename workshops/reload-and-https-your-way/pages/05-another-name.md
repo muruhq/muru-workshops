@@ -14,7 +14,7 @@ name.
 :id: start-host
 :session: server
 :wait: 4s
-muructl run app:application --chdir menu --port {{ app_port }} --https --https-port {{ https_port }} --host menu.test
+muructl run app:application --chdir menu --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --https --https-port {{ https_port }} --host menu.test
 ```
 
 The certificate line says `self-signed certificate for localhost,
@@ -44,10 +44,11 @@ out=$(curl -sS --max-time 2 --cacert muru-cache/certs/dev.pem --resolve menu.tes
 
 ```{hint}
 :title: If the check fails
-"Address already in use" in the terminal on the left means another
-program has port {{ app_port }} or {{ https_port }}: change `app_port`
-or `https_port` from the gear button in the header of this panel,
-then start the project again.
+"is in use by" in the terminal on the left, followed by a program and
+its process id, means another program has the port it names,
+{{ app_port }}, {{ https_port }} or the dashboard's {{ dashboard_port }}:
+change `app_port`, `https_port` or `dashboard_port` from the gear
+button in the header of this panel, then start the project again.
 ```
 
 `over https with HTTP/2.0`, under the name `menu.test`. A name the
@@ -68,7 +69,7 @@ and start it that way.
 :id: start-https-only
 :session: server
 :wait: 4s
-muructl run app:application --chdir menu --port {{ app_port }} --https-port {{ https_port }} --https-only --host menu.test
+muructl run app:application --chdir menu --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --https-port {{ https_port }} --https-only --host menu.test
 ```
 
 The serving line now says `https://127.0.0.1:{{ https_port }}

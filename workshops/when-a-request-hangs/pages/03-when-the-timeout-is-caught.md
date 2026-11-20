@@ -30,7 +30,7 @@ soft one.
 :id: start-hard
 :session: server
 :wait: 3s
-muructl run accounts:application --port {{ app_port }} --timeout soft=2s --timeout hard=7s
+muructl run accounts:application --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --timeout soft=2s --timeout hard=7s
 ```
 
 ```{quiz}
@@ -63,13 +63,16 @@ curl -s --max-time 2 http://127.0.0.1:{{ app_port }}/health | grep '^ok$' && ech
 - two seconds in, the soft timeout's line, `at accounts.py line ... in
   fetch_upstream`, and no traceback: the loop caught the exception;
 
-- seven seconds in, `a request has run for 7.6 s, past the hard timeout
-  of 7 s; replacing it`, the access log line, `504` with
-  `reason=hard_timeout`, every thread's stack, a new worker that
-  serves at once, and `gave up 1 request for the edge to answer`;
+- seven seconds in, `a request has run for ... s, past the hard
+  timeout of 7 s; replacing it`, the access log line, `504` with
+  `reason=hard_timeout`, a new worker started, `gave up 1 request for
+  the edge to answer`, and every thread's stack;
 
-- about fifteen seconds later, after the hard drain grace and the
-  shutdown timeout, `did not stop, killing` and `replaced by pid ...`.
+- then `replaced by pid ...`, and the new worker's `is ready`: it
+  serves at once;
+
+- about fifteen seconds later, after the hard drain grace,
+  `exited after its drain grace`.
 
 The request that condemned the worker is answered the moment the
 worker is replaced. The grace is for the worker's other requests,

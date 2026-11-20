@@ -39,16 +39,20 @@ GREETING = "Good morning"
 for i in 1 2 3 4 5 6 7 8 9 10; do out=$(curl -s --max-time 2 http://127.0.0.1:{{ app_port }}/); case "$out" in "Good morning"*) echo "$out"; exit 0;; esac; sleep 1; done; echo "${out:-Nothing answers on port {{ app_port }}.} Check the terminal on the left for a reload."; exit 1
 ```
 
-In the terminal on the left, after `reloading, ... greeting.py
-changed`:
+Each release's output reaches the terminal through a log relay of its
+own, so the lines of the new release and the old can arrive a few
+milliseconds out of step, interleaved. Read them by release. In the
+terminal on the left, after `reloading, ... greeting.py changed`:
 
-- the new host's `on_load` and `pre_fork`, with a new process id;
+- the new host's `on_load` and `pre_fork`, with a new process id, then
+  the new workers' `post_fork` and `on_ready`;
 
-- the new workers' `post_fork` and `on_ready`, then `switched to
-  release r2`;
+- `switched to release r2`, which `muructl` prints once the new
+  workers are ready, though their lines may arrive just after it;
 
 - the old host's `received SIGTERM, stopping`, and the old workers'
-  `on_drain` and `on_exit`, with the old process ids.
+  `on_drain` and `on_exit`, with the old process ids, all after the
+  switch.
 
 The new release served before the old one began to stop, so no request
 went without a worker.

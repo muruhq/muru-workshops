@@ -12,7 +12,7 @@ which serves one request at a time, as gunicorn's `sync` worker does.
 :id: start-one-thread
 :session: server
 :wait: 3s
-muructl run work:application --port {{ app_port }} --processes 1 --threads 1 --access-log-file requests.jsonl
+muructl run work:application --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --processes 1 --threads 1 --access-log-file requests.jsonl
 ```
 
 The access log goes to the file now, so the terminal shows only the
@@ -28,10 +28,11 @@ curl -sS --max-time 2 http://127.0.0.1:{{ app_port }}/
 
 ```{hint}
 :title: If the check fails
-Look at the terminal on the left. "Address already in use" means
-another program has port {{ app_port }}: change `app_port` from the
-gear button in the header of this panel, then start the application
-again.
+Look at the terminal on the left. "is in use by", followed by a
+program and its process id, means another program has the port it
+names, {{ app_port }} or the dashboard's {{ dashboard_port }}: change
+`app_port` or `dashboard_port` from the gear button in the header of
+this panel, then start the application again.
 ```
 
 Load both views. This takes about eight seconds.

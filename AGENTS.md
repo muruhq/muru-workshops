@@ -89,7 +89,7 @@ Muru is not installed in this project's environment. To try something
 against the release the workshops teach, make a scratch environment
 outside the repository and install the pinned version into it, for
 example `uv venv /tmp/m && uv pip install --python /tmp/m/bin/python
-muructl==0.1.0a23`, then run `muructl` from it with `VIRTUAL_ENV` set.
+muructl==0.1.0a33`, then run `muructl` from it with `VIRTUAL_ENV` set.
 muructl supplies the `muru` runtime library itself, fetching it once
 into its cache. Use loopback ports that nothing else uses, and stop
 every server you start by its own process id, never with a pattern
@@ -127,7 +127,7 @@ servers and run terminals, which JupyterLite cannot.
 
 - Each workshop declares an `environment` with a `requirements.txt`
   pinning `muructl` to the release in `reference/muru`, written the
-  PyPI way (`0.1.0a23`), plus anything else it needs, such as a
+  PyPI way (`0.1.0a33`), plus anything else it needs, such as a
   framework. `muru`, the runtime library, is not in it: muructl puts
   the copy matching its own version on the application's path,
   unpacked once into its user cache (`~/.cache/muru` on Linux), or
@@ -315,11 +315,15 @@ workshop. Run them unasked only when everything stays inside the
 workshop directory and installs nothing beyond its own environment,
 which the conventions above require, so a workshop that follows them is
 safe to test. For these workshops, staying inside also allows serving
-on a loopback port named by a workshop variable, and the temporary
-socket directory `muructl run` makes under the system's temporary
-directory and removes when it exits, and a daemon workshop's run
-directory, `/tmp/muru-<word>` as its `muru_run_dir` variable names,
-and the runtime library muructl unpacks into its user cache.
+on a loopback port named by a workshop variable, and what `muructl
+run` keeps in the user's runtime directory (`/tmp/muru-UID` on macOS)
+while it runs, a directory of its own named by its instance ID and an
+entry in the instance registry beside it, both removed when it exits,
+and a daemon workshop's run directory, `/tmp/muru-<word>` as its
+`muru_run_dir` variable names, and the runtime library muructl unpacks
+into its user cache. A run the self-test kills outright leaves its
+registry entry `stale` in `muructl instance list`; `muructl instance
+prune --entries-only --instance NAME` removes it.
 Check that the workshop's ports are free and that its run directory
 is not in use first, and that nothing of the workshop's is left
 running after the test. The user's own JupyterLab, from `just lab`,

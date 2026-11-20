@@ -48,7 +48,7 @@ project's directory and the port.
 :id: start-from-table
 :session: server
 :wait: 3s
-muructl run notes --port {{ app_port }}
+muructl run notes --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 The first line, `muru: using [tool.muru] from notes/pyproject.toml`,

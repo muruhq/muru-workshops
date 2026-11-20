@@ -38,7 +38,11 @@ flowchart LR
   off for a run. `--reload-dir` names other directories to watch,
   `--reload-include` the files that count as source and
   `--reload-exclude` files that never do, each repeatable, with paths
-  relative to the watched directory.
+  relative to the watched directory. The project's settings files,
+  `pyproject.toml`, `muru.toml` and `muru.local.toml`, are watched
+  whatever the patterns say: a change starts a new release with the
+  settings read again, and a change to a run-table key such as the
+  port is named as needing a restart.
 
 `--reload-include` adds to the default rather than replacing it, so a
 project that adds `**/*.html` still reloads on a changed module. An

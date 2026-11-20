@@ -16,7 +16,7 @@ The project, a small shop in the `shop` directory of your workspace,
 is already there. Nothing you do here needs you to type code.
 
 This workshop has an environment of its own with `muructl` and Flask
-installed, at Muru release 0.1.0a23. Create it first; it takes a minute.
+installed, at Muru release 0.1.0a33. Create it first; it takes a minute.
 
 ```{environment-create}
 :title: Create the workshop environment
@@ -45,5 +45,7 @@ muructl --version
 The shop is served on port {{ app_port }}. If something else already
 uses that port, open the Variables dialog from the gear button in the
 header of this panel and change `app_port`. Every command in the
-workshop uses the new value.
+workshop uses the new value. Each run also serves a dashboard on port
+{{ dashboard_port }}; change `dashboard_port` the same way if that one
+is taken.
 ```

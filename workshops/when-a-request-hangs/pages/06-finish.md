@@ -18,9 +18,9 @@ You have watched Muru deal with requests that never finish.
   default, replaces the worker.
 
 - The request that condemned a worker is answered when the worker is
-  replaced, `504` with `reason=hard_timeout`; a stalled worker's
-  requests are all answered `502` with `reason=worker_stalled`; and
-  each thread's stack is in the log.
+  replaced, `504` with `reason=hard_timeout`; the request that stalled
+  a worker is answered `502` with `reason=worker_stalled`; and each
+  thread's stack is in the log.
 
 - `--access-log errors` with `--slow` keeps only what needs attention,
   and `--access-log-exclude` drops the health checks.

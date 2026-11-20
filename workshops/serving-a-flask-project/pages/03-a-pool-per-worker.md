@@ -55,7 +55,7 @@ factory_phase = "host"
 :id: start-host-phase
 :session: server
 :wait: 3s
-muructl run shop --port {{ app_port }}
+muructl run shop --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 ```{execute}
@@ -109,7 +109,7 @@ back.
 :id: start-worker-phase
 :session: server
 :wait: 3s
-muructl run shop --port {{ app_port }}
+muructl run shop --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 ```{verify}

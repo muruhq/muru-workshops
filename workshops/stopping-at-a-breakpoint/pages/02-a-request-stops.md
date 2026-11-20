@@ -33,7 +33,7 @@ Start the shop in the terminal on the left, with two workers.
 :id: start-shop
 :session: server
 :wait: 3s
-muructl run checkout:application --port {{ app_port }} --processes 2
+muructl run checkout:application --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --processes 2
 ```
 
 ```{quiz}

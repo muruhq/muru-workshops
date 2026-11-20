@@ -33,8 +33,9 @@ GREETING = "Good evening"
 def application(environ, start_response)
 ```
 
-The terminal on the left shows the new host's `SyntaxError`, then
-`muru: reload failed: ... release r2 keeps serving`.
+The terminal on the left shows the new host's `cannot load
+greeting:application: SyntaxError`, then `muru: release r3 failed to
+start: ... release r2 keeps serving`.
 
 ```{execute}
 :id: curl-after-break

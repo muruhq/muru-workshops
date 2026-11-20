@@ -65,9 +65,19 @@ Read the startup lines from the top:
 - `muru: dashboard on ...` is where the dashboard is, which the last
   page opens.
 
+- `muru: pid ...` is the process id of `muructl run` itself, written
+  to a file so that a script which started the run in the background
+  can stop it.
+
 - `muru: admin socket ...` is where `muructl`'s own commands, such as
   `muructl status` and `muructl logs --access`, reach this run from
-  another terminal.
+  another terminal. It and the pid file are in a directory of the
+  run's own, named after the run's instance ID.
+
+- `muru: muructl commands run from ... reach this run` names the
+  directory to run those commands from. With several runs on one
+  machine, or a Muru daemon of your own, that is how a command finds
+  this one. The terminal on the right is already there.
 
 - `muru: watching ... for changes to **/*.py` names the directory the
   run watches for a change to reload on. Nothing in this workshop
@@ -83,10 +93,11 @@ curl -sS --max-time 2 http://127.0.0.1:{{ app_port }}/
 
 ```{hint}
 :title: If the check fails
-Look at the terminal on the left. "Address already in use" means
-another program has port {{ app_port }}: change `app_port` from the
-gear button in the header of this panel, then start the shop again. If
-the dashboard line says `no dashboard`, the shop is still running, but
-change `dashboard_port` before the last page. If nothing is printed
-yet, give it a few seconds and click Check.
+Look at the terminal on the left. "is in use by", followed by a
+program and its process id, means another program has port
+{{ app_port }}: change `app_port` from the gear button in the header
+of this panel, then start the shop again. An error naming the
+dashboard's address means the same for port {{ dashboard_port }}:
+change `dashboard_port` and start the shop again. If nothing is
+printed yet, give it a few seconds and click Check.
 ```

@@ -45,7 +45,7 @@ left.
 :id: start-from-flags
 :session: server
 :wait: 3s
-NOTES_TITLE="Team notes" muructl run notes:application --chdir notes --processes 2 --threads 2 --hooks hooks --timeout soft=5s --port {{ app_port }}
+NOTES_TITLE="Team notes" muructl run notes:application --chdir notes --processes 2 --threads 2 --hooks hooks --timeout soft=5s --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 The hooks module's `worker 0 is starting` and `worker 1 is starting`
@@ -69,9 +69,11 @@ out=$(curl -s --max-time 2 http://127.0.0.1:{{ app_port }}/); printf '%s\n' "$ou
 
 ```{hint}
 :title: If the check fails
-Look at the terminal on the left. "Address already in use" means
-another program has port {{ app_port }}: change `app_port` from the
-gear button in the header of this panel, then start the project again.
+Look at the terminal on the left. "is in use by", followed by a
+program and its process id, means another program has the port it
+names, {{ app_port }} or the dashboard's {{ dashboard_port }}: change
+`app_port` or `dashboard_port` from the gear button in the header of
+this panel, then start the project again.
 ```
 
 That command line is the only record of how the project is served. The

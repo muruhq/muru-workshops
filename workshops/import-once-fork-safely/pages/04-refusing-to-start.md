@@ -31,7 +31,7 @@ Stop the catalogue, then start it again with `--preload true`.
 :id: start-preload-true
 :session: server
 :wait: 3s
-muructl run catalog:application --port {{ app_port }} --processes 2 --preload true
+muructl run catalog:application --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --processes 2 --preload true
 ```
 
 The same two `preload:` lines, then `preload is true, so the import

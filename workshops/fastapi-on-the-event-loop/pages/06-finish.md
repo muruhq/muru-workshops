@@ -11,9 +11,9 @@ You have found out what runs where on a worker's event loop.
   worker, and `muructl run` stops after three failures.
 
 - `async def` runs on the loop, `muru-loop`. A plain `def` path
-  operation runs on AnyIO's threads, forty at once. `asyncio.to_thread`
-  and `sync_to_async` run on Muru's sync threads, eight unless
-  `--sync-threads` says otherwise.
+  operation runs on AnyIO's threads, and `asyncio.to_thread` and
+  `sync_to_async` on Muru's sync threads. `--sync-threads`, eight by
+  default, limits both.
 
 - A blocking call on the loop holds every request in the worker. The
   loop stall timeout replaces a worker whose loop has not run for its

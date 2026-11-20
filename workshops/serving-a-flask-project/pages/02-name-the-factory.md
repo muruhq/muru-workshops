@@ -59,13 +59,13 @@ Start the shop in the terminal on the left.
 :id: start-unnamed
 :session: server
 :wait: prompt
-muructl run shop --port {{ app_port }}
+muructl run shop --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 It does not start. The host says `cannot load shop:create_app:
 RuntimeError: shop:create_app takes no required arguments, so it
 cannot be a WSGI application; if it is an application factory, set
-factory = true in [tool.muru]`, and `muructl run` exits. Mark the
+factory = true in [tool.muru] ...`, and `muructl run` exits. Mark the
 entrypoint as a factory and start it again.
 
 ```{editor-insert}
@@ -80,7 +80,7 @@ factory = true
 :id: start-factory
 :session: server
 :wait: 3s
-muructl run shop --port {{ app_port }}
+muructl run shop --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 The workers now say `worker 0 serves shop:create_app as WSGI`: each
@@ -112,10 +112,11 @@ out=$(curl -s --max-time 2 http://127.0.0.1:{{ app_port }}/); printf '%s\n' "$ou
 
 ```{hint}
 :title: If the check fails
-Look at the terminal on the left. "Address already in use" means
-another program has port {{ app_port }}: change `app_port` from the
-gear button in the header of this panel, then start the shop again.
-`cannot load shop:create_app` means the table does not yet say
-`factory = true`: add it with the action above and start the shop
-again.
+Look at the terminal on the left. "is in use by", followed by a
+program and its process id, means another program has the port it
+names, {{ app_port }} or the dashboard's {{ dashboard_port }}: change
+`app_port` or `dashboard_port` from the gear button in the header of
+this panel, then start the shop again. `cannot load shop:create_app`
+means the table does not yet say `factory = true`: add it with the
+action above and start the shop again.
 ```

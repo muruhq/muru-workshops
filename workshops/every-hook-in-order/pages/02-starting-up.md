@@ -32,7 +32,7 @@ terminal on the left.
 :id: start-greeting
 :session: server
 :wait: 3s
-muructl run greeting:application --hooks hooks --processes 2 --port {{ app_port }}
+muructl run greeting:application --hooks hooks --processes 2 --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 ```{verify}
@@ -45,17 +45,19 @@ curl -sS --max-time 2 http://127.0.0.1:{{ app_port }}/
 
 ```{hint}
 :title: If the check fails
-Look at the terminal on the left. "Address already in use" means
-another program has port {{ app_port }}: change `app_port` from the
-gear button in the header of this panel, then start the application
-again.
+Look at the terminal on the left. "is in use by", followed by a
+program and its process id, means another program has the port it
+names, {{ app_port }} or the dashboard's {{ dashboard_port }}: change
+`app_port` or `dashboard_port` from the gear button in the header of
+this panel, then start the application again.
 ```
 
 Read the `hook` lines from the top:
 
-- `on_load` and `pre_fork` in the host, with the host's process id,
-  untagged because the host printed them itself. They ran once, after
-  the import and before the fork.
+- `on_load` and `pre_fork` in the host, tagged `muru.host[N].stdout:`
+  with the host's process id, as the host's own lines are tagged
+  `muru.host[N]:`. They ran once, after the import and before the
+  fork.
 
 - `post_fork` then `on_ready` in each worker, tagged
   `muru.worker[0].stdout:` and `muru.worker[1].stdout:`, each with its

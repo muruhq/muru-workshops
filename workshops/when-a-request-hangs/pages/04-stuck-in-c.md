@@ -42,12 +42,13 @@ it shortened to ten seconds, so the wait is shorter.
 :id: start-gil
 :session: server
 :wait: 3s
-muructl run accounts:application --port {{ app_port }} --timeout soft=2s --timeout gil_stall=10s
+muructl run accounts:application --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --timeout soft=2s --timeout gil_stall=10s
 ```
 
 `check.py` asks `/check` about the long name and, a second later, asks
 `/health`, an innocent request that answers at once. It reports when
-both are done, in about ten seconds.
+both are done, `/check` in about ten seconds and `/health` some
+fifteen seconds later.
 
 ```{execute}
 :id: run-check
@@ -70,21 +71,28 @@ Both got `502`. In the terminal on the left:
   it in;
 
 - ten seconds in, the event `worker.gil_stalled: worker 0 (pid ...):
-  no thread has run Python for 10.0 s, past the GIL stall timeout of
-  10 s`, the line saying the worker is being replaced, two access log
-  lines, `502` with `reason=worker_stalled`, a new worker, and
-  `gave up 2 requests for the edge to answer`;
+  no thread has run Python for 10... s, past the GIL stall timeout of
+  10 s`, the line saying the worker is being replaced, `/check`'s
+  access log line, `502` with `reason=worker_stalled`, a new worker,
+  and `gave up 2 requests for the edge to answer`;
 
 - each thread's stack, written by `faulthandler`, which needs no GIL,
-  one of them at the `USER_NAME.match` line of `accounts.py`;
+  one of them at the `USER_NAME.match` line of `accounts.py`, then
+  `replaced by pid ...`;
 
-- later, `did not stop, killing` and `replaced by pid ...`.
+- about fifteen seconds later, `did not stop, killing`, `/health`'s
+  access log line, `502` with `reason=worker_crashed`, and `exited
+  after its drain grace`.
 
 `/health` was never stuck itself. It went to the same worker, whose
 four threads could not run a line of Python while the match held the
 GIL, so it shared the stuck request's fate: a stalled worker cannot
-finish anything, so every request it held is answered at once rather
-than after the grace. A hard timeout, had one been set, would have
+finish anything. The host gave both requests up for the edge to
+answer at once, as `gave up 2` says, and that is what Muru intends:
+every request a stalled worker held answered `502` with
+`reason=worker_stalled` when the stall is caught. In this release the
+edge answers only the stuck one then, and `/health` waits for the old
+worker to be killed (muruhq/muru#836). A hard timeout, had one been set, would have
 replaced this worker at its length too, since a request was in flight,
 answering it `504` with `reason=hard_timeout`; the GIL stall timeout
 is the one that also catches a stall with no request at all, in a

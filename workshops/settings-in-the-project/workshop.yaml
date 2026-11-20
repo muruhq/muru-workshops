@@ -28,6 +28,10 @@ variables:
     type: number
     default: 8080
     description: Port muructl run serves the project on; change it if that port is taken
+  - name: dashboard_port
+    type: number
+    default: 8081
+    description: Port muructl run serves its dashboard on; change it if that port is taken
   - name: other_port
     type: number
     default: 8090

@@ -18,7 +18,7 @@ the workers to share. Stop the application and start it that way.
 :id: start-no-preload
 :session: server
 :wait: 3s
-muructl run greeting:application --hooks hooks --processes 2 --port {{ app_port }} --preload false
+muructl run greeting:application --hooks hooks --processes 2 --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --preload false
 ```
 
 ```{verify}
@@ -54,7 +54,7 @@ lifespan startup and shutdown. Stop the application and start
 :id: start-events
 :session: server
 :wait: 3s
-muructl run events:application --hooks hooks --port {{ app_port }}
+muructl run events:application --hooks hooks --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 ```{verify}

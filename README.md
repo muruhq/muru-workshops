@@ -34,7 +34,7 @@ all.
 Where Muru fits among Python web servers, what it does while you
 develop, and how its daemon deploys releases without downtime, compared
 throughout with Apache and mod_wsgi, gunicorn, uvicorn and Granian.
-Each workshop installs Muru 0.1.0a23 into an environment of its own and
+Each workshop installs Muru 0.1.0a33 into an environment of its own and
 runs it in two terminals, with documents and the application shown
 above them. Workshops 7 to 10 run the daemon, which keeps its state
 in the workspace and its sockets in a short directory under `/tmp`.
@@ -111,7 +111,7 @@ A Flask, Django or FastAPI project taken through development under
 `muructl run` in depth: where its settings live, what each framework
 needs, the hooks around the fork, reload and HTTPS fitted to a real
 project, and what happens when a request hangs. Each workshop installs
-Muru 0.1.0a23, and the framework it teaches, into an environment of
+Muru 0.1.0a33, and the framework it teaches, into an environment of
 its own, and names the Meet Muru workshop it builds on. Workshops 2 to
 4 can be taken in any order, or only the one for your framework.
 

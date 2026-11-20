@@ -77,7 +77,8 @@ shows what gunicorn printed.
 
 `muructl release list` shows the release as one instance of the
 `gunicorn` profile, and `show_processes.py` the gunicorn master and
-its two workers under the daemon, beside the edge.
+its two workers beside the edge, under a log relay of their own that
+writes what gunicorn prints to the release's log.
 
 ```{execute}
 :id: list-gunicorn

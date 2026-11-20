@@ -25,7 +25,7 @@ Stop the application, then start it again with HTTPS on port
 :id: start-https
 :session: server
 :wait: 3s
-muructl run greeting:application --port {{ app_port }} --https --https-port {{ https_port }}
+muructl run greeting:application --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --https --https-port {{ https_port }}
 ```
 
 The `serving` line now names both addresses, and a new line says

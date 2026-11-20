@@ -46,8 +46,8 @@ flowchart LR
         E[Edge]
         K[Controller]
     end
-    K -. starts .-> H[Host<br/>python -m muru.host]
-    K -. starts .-> R[Log relay<br/>muructl relay run]
+    K -. starts .-> H[Host<br/>muru host, in Python]
+    K -. starts .-> R[Log relay<br/>muru relay, in Rust]
     H -. fork .-> W1[Worker]
     H -. fork .-> W2[Worker]
     E -->|worker link| W1

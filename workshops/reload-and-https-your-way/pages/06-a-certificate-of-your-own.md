@@ -38,7 +38,7 @@ trust. Stop the project and serve the new certificate.
 :id: start-own
 :session: server
 :wait: 4s
-muructl run app:application --chdir menu --port {{ app_port }} --https-port {{ https_port }} --https-only --tls-cert certs/server.pem --tls-key certs/server.key
+muructl run app:application --chdir menu --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --https-port {{ https_port }} --https-only --tls-cert certs/server.pem --tls-key certs/server.key
 ```
 
 `TLS certificate from certs/server.pem` replaces the self-signed

@@ -36,7 +36,7 @@ level = "INFO"
 :id: start-with-logging
 :session: server
 :wait: 3s
-muructl run shop --port {{ app_port }}
+muructl run shop --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 Each worker now logs `INFO in __init__: application built in process
@@ -96,7 +96,7 @@ FLASK_PROPAGATE_EXCEPTIONS = "true"
 :id: start-propagating
 :session: server
 :wait: 3s
-muructl run shop --port {{ app_port }}
+muructl run shop --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 Load `/stock` in the shop's pane.

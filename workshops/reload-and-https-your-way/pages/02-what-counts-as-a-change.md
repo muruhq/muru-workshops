@@ -34,7 +34,7 @@ to **/*.py`, says what counts.
 :id: start-default
 :session: server
 :wait: 3s
-muructl run app:application --chdir menu --port {{ app_port }}
+muructl run app:application --chdir menu --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }}
 ```
 
 ```{execute}
@@ -76,7 +76,7 @@ counted as source. `--reload-include` adds its patterns to the default
 :id: start-included
 :session: server
 :wait: 3s
-muructl run app:application --chdir menu --port {{ app_port }} --reload-include '**/*.html' --reload-include '**/*.json'
+muructl run app:application --chdir menu --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --reload-include '**/*.html' --reload-include '**/*.json'
 ```
 
 The last startup line says what is watched: `muru: watching .../menu
@@ -99,9 +99,11 @@ out=$(curl -s --max-time 2 http://127.0.0.1:{{ app_port }}/); printf '%s\n' "$ou
 
 ```{hint}
 :title: If the check fails
-Look at the terminal on the left. "Address already in use" means
-another program has port {{ app_port }}: change `app_port` from the
-gear button in the header of this panel, then start the project again.
+Look at the terminal on the left. "is in use by", followed by a
+program and its process id, means another program has the port it
+names, {{ app_port }} or the dashboard's {{ dashboard_port }}: change
+`app_port` or `dashboard_port` from the gear button in the header of
+this panel, then start the project again.
 ```
 
 `On the menu`: a new start reads the template. But look at the

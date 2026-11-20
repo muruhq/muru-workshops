@@ -49,13 +49,14 @@ curl -s -X POST -w '%{http_code}\n' http://127.0.0.1:{{ app_port }}/crash
 The edge answered 502 with a short body giving the reason and the
 request id. In the terminal on the left, the host reports that the
 worker exited and that it started a new one. List the processes again:
-one worker has a new process id, and the host's is the same.
+one worker has a new process id and has been up only a few seconds,
+and the host's is the same.
 
 ```{execute}
 :id: show-after-crash
 :session: client
 :wait: prompt
-python show_processes.py {{ app_port }}
+muructl status --processes
 ```
 
 ```{verify}
@@ -63,5 +64,5 @@ python show_processes.py {{ app_port }}
 :label: The host replaced the worker that died
 :substrate: shell
 :trigger: after:show-after-crash
-out=$(python show_processes.py {{ app_port }} 2>&1); printf '%s\n' "$out" | tail -n 1 | grep '^3 workers' || { printf '%s\n' "$out"; exit 1; }
+out=$(muructl status --processes 2>&1); n=$(printf '%s\n' "$out" | grep -c ' worker  '); if [ "$n" = 3 ]; then echo "3 workers are serving"; else printf '%s\n' "$out"; exit 1; fi
 ```

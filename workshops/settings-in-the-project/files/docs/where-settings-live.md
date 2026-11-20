@@ -73,6 +73,11 @@ the same keys for one machine alone: the port that is free on this
 laptop, the dashboard turned off. It is never committed, and the run
 warns while the project's `.gitignore` does not name it.
 
+A run that is serving watches all three files. A change to one starts
+a new release with the settings read again, and a change only a new
+run can apply, such as the port, is named in the terminal as needing
+a restart.
+
 A flag wins over the local file, the local file over the project's
 table, and the table over the defaults; lists such as `hosts` and the
 reload patterns add across the layers, and a boolean a file turns on

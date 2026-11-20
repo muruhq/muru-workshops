@@ -32,6 +32,7 @@ of errors only.
 # this table.
 [tool.muru.run]
 port = {{ app_port }}
+dashboard = "127.0.0.1:{{ dashboard_port }}"
 access_log = "errors"
 ```
 
@@ -64,10 +65,12 @@ grep -q '^\[tool.muru.run\]' notes/pyproject.toml || { echo "notes/pyproject.tom
 
 ```{hint}
 :title: If the check fails
-Look at the terminal on the left. "Address already in use" means
-another program has port {{ app_port }}: change `app_port` from the
-gear button in the header of this panel, write the table again so it
-has the new port, and start the project again.
+Look at the terminal on the left. "is in use by", followed by a
+program and its process id, means another program has the port it
+names, {{ app_port }} or the dashboard's {{ dashboard_port }}: change
+`app_port` or `dashboard_port` from the gear button in the header of
+this panel, write the table again so it has the new port, and start
+the project again.
 ```
 
 The table is committed with the project, so it says how everyone
@@ -85,6 +88,11 @@ table with the same keys for this machine alone.
 [run]
 port = {{ other_port }}
 ```
+
+The run on the left noticed the new file and reloaded, since a run
+watches its settings files, but it says `muru.local.toml changed port;
+restart the run for it to take effect`. A reload reads the settings
+again, and a new port needs a new run.
 
 A file for one machine must never be committed, and the run checks
 that the project's `.gitignore` names it. This project has no

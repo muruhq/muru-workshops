@@ -5,7 +5,7 @@ requires: [quiz:flag-or-table, verify:served-from-table, verify:project-stopped-
 
 # Into the project
 
-The last command line carried five flags, and the reload ones before
+The last command line carried six flags, and the reload ones before
 it three more. Everyone who checks the project out would have to type
 them, and so would you next week. Read the document's last section:
 the flags of `muructl run` that say how a checkout is served have keys
@@ -33,6 +33,7 @@ entrypoint = "app:application"
 # this table.
 [tool.muru.run]
 port = {{ app_port }}
+dashboard = "127.0.0.1:{{ dashboard_port }}"
 https_port = {{ https_port }}
 https_only = true
 hosts = ["menu.test"]
@@ -74,11 +75,13 @@ grep -q '^\[tool.muru.run\]' menu/pyproject.toml || { echo "menu/pyproject.toml 
 
 ```{hint}
 :title: If the check fails
-Look at the terminal on the left. "Address already in use" means
-another program has port {{ app_port }} or {{ https_port }}: change
-`app_port` or `https_port` from the gear button in the header of this
-panel, write the table again so it has the new ports, and start the
-project again.
+Look at the terminal on the left. "is in use by", followed by a
+program and its process id, means another program has the port it
+names, {{ app_port }}, {{ https_port }} or the dashboard's
+{{ dashboard_port }}: change `app_port`, `https_port` or
+`dashboard_port` from the gear button in the header of this panel,
+write the table again so it has the new ports, and start the project
+again.
 ```
 
 A flag still wins over the table for one run, so `muructl run menu

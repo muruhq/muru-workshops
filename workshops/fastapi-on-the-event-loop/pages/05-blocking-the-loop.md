@@ -42,7 +42,7 @@ with a loop stall timeout of five seconds.
 :id: start-stall
 :session: server
 :wait: 4s
-muructl run main:app --port {{ app_port }} --timeout loop_stall=5s
+muructl run main:app --port {{ app_port }} --dashboard 127.0.0.1:{{ dashboard_port }} --timeout loop_stall=5s
 ```
 
 `stall.py` asks for `/stall`, and a second later for `/where/async`,
@@ -73,11 +73,12 @@ Both requests got `502`. In the terminal on the left:
   up 2 requests for the edge to answer`;
 
 - the stalled worker's threads' stacks, with `muru-loop` in `stall` at
-  `main.py`'s `time.sleep(30)`, which is where to look, then the new
-  worker's `is ready`;
+  `main.py`'s `time.sleep(30)`, which is where to look, then `replaced
+  by pid ...` and the new worker's `is ready`;
 
 - about fifteen seconds later, after the hard drain grace and the
-  shutdown timeout, `did not stop, killing` and `replaced by pid ...`.
+  shutdown timeout, `did not stop, killing` and `exited after its
+  drain grace`.
 
 The innocent request shared the stalled worker's loop, so it shared
 its fate, and both were answered the moment the stall was caught: a
